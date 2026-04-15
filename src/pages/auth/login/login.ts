@@ -30,7 +30,7 @@ form.addEventListener("submit", (e: SubmitEvent) => {
     if (userFound.role === "admin") {
       navigate("/src/pages/admin/dashboard/dashboard.html");
     } else if (userFound.role === "client") {
-      navigate("/src/pages/client/home/home.html");
+      navigate("/src/pages/store/home/home.html");
     }
   } else {
     alert(`El rol seleccionado "${valueRol}", no coincide con el registrado "${userFound.role}"`);
