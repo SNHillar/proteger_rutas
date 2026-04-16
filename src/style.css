@@ -247,3 +247,69 @@ body{
     background-color: #e85d04; /* Un naranja más oscuro al presionar */
     box-shadow: 0 4px 12px rgba(232, 93, 4, 0.3);
 }
+
+
+
+/*--------ESTILOS PARA EL CONTENIDO DE LA PÁGINA DE LOGIN--------*/
+
+
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.login-container h1 {
+    color: var(--primary-dark);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.login-container input {
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border--color);
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.login-container input:focus {
+    border-color: var(--accent-orange);
+    box-shadow: 0 0 8px rgba(251, 133, 0, 0.5);
+    outline: none;
+}
+
+.login-container button {
+    background-color: var(--accent-orange);
+    color: var(--white);
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+.login-container button:hover {
+    background-color: #e85d04; /* Un naranja más oscuro al presionar */
+    box-shadow: 0 4px 12px rgba(232, 93, 4, 0.3);
+}
+
+.login-container label {
+    text-align: center;
+    color: var(--primary-light);
+}
+
+.login-container .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
