@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodStore Carrito</title>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🍕</span>
+                <h1>Food<span>Store</span></h1>
+            </div>
+
+            <nav class="main-nav">
+                <a href="../home/home.html" class="nav-link">
+                    <i class="icon">🏠</i> Catálogo
+                </a>
+                <a href="../cart/cart.html" class="nav-link cart-link">
+                    <i class="icon">🛒</i> Carrito
+                    <span id="cart-count" class="badge">0</span>
+                </a>
+                <button id="logout-btn" class="btn-logout">Salir</button>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="cart-section">
+            <h2>Carrito de Compras</h2>
+            <div id="cart-items" class="cart-items">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+            <div class="cart-total">
+                <strong>Total: $<span id="total-amount">0.00</span></strong>
+            </div>
+            <button id="checkout-btn" class="btn-checkout">Finalizar Compra</button>
+        </section>
+    </main>
+    <script type="module" src="/src/pages/store/cart/cart.js"></script>
+</body>
+</html>

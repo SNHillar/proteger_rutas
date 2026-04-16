@@ -4,17 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Store</title>
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="../../../style.css">
 </head>
 <body>
-    <main>
-        <section class="filters">
-            <input type="text" id="searchInput" placeholder="Buscar productos...">            
-        </section>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🍕</span>
+                <h1>Food<span>Store</span></h1>
+            </div>
 
-        <div class="products-container">
-            <!-- Product items will be dynamically inserted here -->
+            <nav class="main-nav">
+                <a href="../home/home.html" class="nav-link">
+                    <i class="icon">🏠</i> Catálogo
+                </a>
+                <a href="../cart/cart.html" class="nav-link cart-link">
+                    <i class="icon">🛒</i> Carrito
+                    <span id="cart-count" class="badge">0</span>
+                </a>
+                <button id="logout-btn" class="btn-logout">Salir</button>
+            </nav>
         </div>
+    </header>
+    <main class="store-layout">
+        <aside class="sidebar">
+            <section class="categorias-container">
+                <h2>Categorías</h2>
+                <ul id="categoriasList">
+                    <!-- Category items will be dynamically inserted here -->
+                </ul>
+            </section>
+        </aside>
+        <section class="content-area">
+            <section class="filters">
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar productos...">
+                </div>
+            </section>
+            <section class="products-section">
+                <div class="products-container">
+                    <!-- Product items will be dynamically inserted here -->
+                </div>
+            </section>
+        </section>
     </main>
     <script type="module" src="/src/pages/store/home/home.js"></script>
 </body>
