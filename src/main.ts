@@ -1,4 +1,4 @@
-import { IUser } from "./types/IUser";
+import type { IUser } from "./types/IUser";
 import { navigate } from "./utils/navigate";
 
 const userData: IUser | null = JSON.parse(localStorage.getItem("userData") || "null");
