@@ -21,7 +21,7 @@ function renderCart() {
     cartContainer.innerHTML = "";
 
     let total: number = 0;
-    cartItems.forEach((item: CartItem, index: number) => {
+    cartItems.forEach((item: CartItem) => {
         const cartItemDiv = document.createElement("div") as HTMLDivElement;
         cartItemDiv.classList.add("cart-item");
 

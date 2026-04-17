@@ -336,6 +336,27 @@ body{
     }
 }
 
+.logo-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    h1{
+        margin-top: 2rem;
+        color: var(--primary-dark);
+        margin-left: 1rem;
+    }
+    span{
+        color: var(--accent-orange);
+    }
+    .logo-icon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+    }
+}
+
 
 /* ----------------ESTILOS PARA EL CONTENIDO DE LA PÁGINA DE CARRITO ----------------*/
 
