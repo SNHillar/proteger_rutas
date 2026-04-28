@@ -8,6 +8,8 @@ Como el sistema utiliza localStorage para la persistencia (almacenamiento local 
 
 2. Luego, inicia sesión con las credenciales que acabas de crear. Esto te permitirá acceder a la funcionalidad del sistema.
 
+(Nota: Actualmente solo se pueden registrar usuarios con el rol de "client". El rol de "admin" no está disponible para registro, pero puedes modificar el localStorage manualmente para agregar un usuario con ese rol si deseas probar la funcionalidad de administrador, aun que no esta desarrollada la vista de administrador, por ahora).
+
 Pruebas
 
 Para probar el sistema, puedes realizar las siguientes acciones:
@@ -16,7 +18,7 @@ Para probar el sistema, puedes realizar las siguientes acciones:
 
 - Ver el carrito de compras para verificar que los productos se hayan agregado correctamente.
 
-- Eliminar productos del carrito de compras para asegurarte de que la funcionalidad de eliminación funcione correctamente.
+- Eliminar y limpiarproductos del carrito de compras para asegurarte de que la funcionalidad de eliminación funcione correctamente.
 
 - Actualizar las cantidades de los productos en el carrito para verificar que el sistema maneje correctamente los cambios en las cantidades.
 

@@ -496,6 +496,7 @@ body{
     color: #d90429; 
     background-color: #ffccd5; 
     border-radius: 4px;
+    padding: 0.3rem 0.3rem;
     font-size: 0.85rem;
     text-align: center;
     margin-bottom: 1rem;
