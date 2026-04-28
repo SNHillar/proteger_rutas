@@ -14,6 +14,7 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body{
@@ -484,4 +485,77 @@ body{
 .item-controls button:hover {
     background-color: var(--accent-orange); /* Un naranja más oscuro al presionar */
     box-shadow: 0 4px 12px rgba(232, 93, 4, 0.3);
+}
+
+
+/* MEDIAS QUERIES*/
+
+
+@media (max-width: 768px) {
+    .store-layout {
+        flex-direction: column; /* El Aside ahora se pone arriba de los productos */
+        padding: 0 10px;
+    }
+
+    .sidebar {
+        width: 100%; /* El Aside ocupa todo el ancho */
+        margin-bottom: 10px;
+    }
+
+    .categorias-container h2 {
+        font-size: 1.2rem;
+        padding: 0.3rem 1rem;
+    }
+
+    #categoriasList {
+        display: flex; /* Categorías en una fila con scroll horizontal */
+        overflow-x: auto;
+        gap: 10px;
+        padding-bottom: 10px;
+    }
+
+    #categoriasList li {
+        white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+        margin-bottom: 0;
+        background-color: var(--white);
+        border: 1px solid var(--border--color);
+    }
+
+    .header-container {
+        flex-direction: column; /* Logo arriba, Nav abajo */
+        gap: 1rem;
+    }
+
+    .main-nav {
+        width: 100%;
+        justify-content: space-around; /* Reparte los iconos en el cel */
+    }
+}
+
+/* Celulares pequeños (480px) */
+@media (max-width: 480px) {
+    .products-container {
+        grid-template-columns: 1fr; /* Una sola card gigante por fila */
+    }
+
+    .product-card img {
+        height: 200px; /* Le damos más protagonismo a la foto en el cel */
+    }
+
+    .logo h1 {
+        font-size: 1.5rem; /* Achicamos el texto del logo */
+    }
+
+    .search-input {
+        padding: 0.7rem 2.5rem; /* Ajustamos padding del buscador */
+    }
+
+    .cart-section {
+        margin: 20px 10px;
+        padding: 1rem;
+    }
+
+    .cart-total {
+        justify-content: center; /* Centramos el total en el celu */
+    }
 }
