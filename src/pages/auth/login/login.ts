@@ -22,7 +22,7 @@ form.addEventListener("submit", (e: SubmitEvent) => {
   const userFound = usersData.find(user => user.email === valueEmail && user.password === valuePassword);
 
   if (!userFound) {
-    alert("Correo o contraseña incorrectos");
+    showError("Correo o contraseña incorrectos");
     return;
   }
   if (userFound.role === valueRol) {
@@ -33,7 +33,7 @@ form.addEventListener("submit", (e: SubmitEvent) => {
       navigate("/src/pages/store/home/home.html");
     }
   } else {
-    alert(`El rol seleccionado "${valueRol}", no coincide con el registrado "${userFound.role}"`);
+    showError(`El rol seleccionado "${valueRol}", no coincide con el registrado "${userFound.role}"`);
     return;
   }
 
@@ -47,3 +47,9 @@ form.addEventListener("submit", (e: SubmitEvent) => {
   const parseUser = JSON.stringify(userFound);
   localStorage.setItem("userData", parseUser);
 });
+
+function showError(message: string) {
+  const errorMessage = document.getElementById("error-message") as HTMLParagraphElement;
+  errorMessage.textContent = message;
+  errorMessage.style.display = "block";
+}

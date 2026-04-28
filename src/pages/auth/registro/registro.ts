@@ -16,23 +16,23 @@ form?.addEventListener("submit", (e: SubmitEvent) => {
     const password = (document.getElementById("password") as HTMLInputElement).value;
 
     if (!email || !password) {
-      alert("Por favor, completa todos los campos");
+      showError("Por favor, completa todos los campos");
       return;
     }
     
      if (emailExists(email)) {
-       alert("El correo ya está registrado");
+       showError("El correo ya está registrado");
        return;
      }
 
      if (!isPasswordValid(password)) {
-       alert("La contraseña debe tener al menos 6 caracteres");
+       showError("La contraseña debe tener al menos 6 caracteres");
        return;
      }
 
      users.push({ email, password, loggedIn: false, role: "client" });
      localStorage.setItem("users", JSON.stringify(users));
-     alert("Registro exitoso");
+     showError("Registro exitoso");
      form.reset();
      navigate("/src/pages/auth/login/login.html");
  });
@@ -43,3 +43,9 @@ const emailExists = (email: string): boolean => {
 }
 
 const isPasswordValid = (password: string): boolean => password.length >= 6;
+
+function showError(message: string) {
+  const errorMessage = document.getElementById("error-message") as HTMLParagraphElement;
+  errorMessage.textContent = message;
+  errorMessage.style.display = "block";
+}
