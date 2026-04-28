@@ -18,7 +18,7 @@ Para probar el sistema, puedes realizar las siguientes acciones:
 
 - Ver el carrito de compras para verificar que los productos se hayan agregado correctamente.
 
-- Eliminar y limpiarproductos del carrito de compras para asegurarte de que la funcionalidad de eliminación funcione correctamente.
+- Eliminar y limpiar productos del carrito de compras para asegurarte de que la funcionalidad de eliminación funcione correctamente.
 
 - Actualizar las cantidades de los productos en el carrito para verificar que el sistema maneje correctamente los cambios en las cantidades.
 

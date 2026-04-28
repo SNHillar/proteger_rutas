@@ -11,35 +11,35 @@
 
 <body>
     <main class="login-container">
-        <div class="logo-login">
-            <span class="logo-icon">🍕</span>
-            <h1>Food<span>Store</span></h1>
+        <div class="login-container__logo">
+            <span class="login-container__span">🍕</span>
+            <h1 class="login-container__h1">Food<span>Store</span></h1>
         </div>
 
         <h1> Login</h1>
     
         <form id="form" class="login-form">
     
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" autocomplete="off" placeholder="example@example.com">
+            <div class="login-form__group">
+                <label class="login-form__label" for="email">Email</label>
+                <input class="login-form__input" for="email" id="email" name="email" autocomplete="off" placeholder="example@example.com">
             </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" autocomplete="off" placeholder="********">
+            <div class="login-form__group">
+                <label class="login-form__label" for="password">Password</label>
+                <input class="login-form__input" type="password" id="password" name="password" autocomplete="off" placeholder="********">
             </div>
-            <div class="input-group">
-                <label for="rol">Rol</label>
-                <select name="rol" id="rol">
+            <div class="login-form__group">
+                <label class="login-form__label" for="rol">Rol</label>
+                <select class="login-form__select" name="rol" id="rol">
                     <option value="">Seleccione un rol</option>
                     <option value="client">Cliente</option>
                     <option value="admin">Admin</option>
                 </select>
             </div>
             
-            <p id="error-message" class="error-message"></p>
-            <button type="submit" class="btn-login">Ingresar</button>
-            <button type="button" id="registerBtn" class="btn-register">Registrarse</button>
+            <p id="error-message" class="login-form__error"></p>
+            <button class="login-form__btn" type="submit" class="btn-login">Ingresar</button>
+            <button class="login-form__btn" type="button" id="registerBtn" class="btn-register">Registrarse</button>
         </form>
 
     </main>
