@@ -24,14 +24,19 @@ function renderProducts(products: Product[]) {
         productImage.alt = product.nombre;
 
         const productCategory = document.createElement("p") as HTMLParagraphElement;
-        productCategory.textContent = product.categorias.map((cat: { nombre: string }) => cat.nombre).join(", ");
+        productCategory.textContent = product.categorias.map((cat: { nombre: string }) => cat.nombre).join(", ").toUpperCase();
 
+        const productDescription = document.createElement("p") as HTMLParagraphElement;
+        productDescription.textContent = product.descripcion;
+        productDescription.classList.add("product-description");
+        
         const productName = document.createElement("h3") as HTMLHeadingElement;
         productName.textContent = product.nombre;
-
+        
         const productPrice = document.createElement("p") as HTMLParagraphElement;
         productPrice.textContent = `$${product.precio}`;
-
+        productPrice.classList.add("product-price");
+        
         const addToCartButton = document.createElement("button") as HTMLButtonElement;
         addToCartButton.textContent = "Agregar al carrito";
         addToCartButton.addEventListener("click", () => {
@@ -58,7 +63,7 @@ function renderProducts(products: Product[]) {
             }, 1000);
         });
 
-        productCard.append(productImage, productCategory, productName, productPrice, addToCartButton);
+        productCard.append(productImage, productCategory, productDescription, productName, productPrice, addToCartButton);
         productsContainer.appendChild(productCard);
     });
 
