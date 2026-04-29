@@ -10,36 +10,36 @@
 </head>
 
 <body>
-    <main class="login-container">
-        <div class="login-container__logo">
-            <span class="login-container__span">🍕</span>
-            <h1 class="login-container__h1">Food<span>Store</span></h1>
+    <main class="auth-card login-container">
+        <div class="main-logo login-container__logo">
+            <span class="main-logo__icon">🍕</span>
+            <h1 class="main-logo__text">Food<span class="main-logo__span">Store</span></h1>
         </div>
 
-        <h1> Login</h1>
+        <h1 class="auth-card__text">Login</h1>
     
-        <form id="form" class="login-form">
+        <form id="form" class="form login-form">
     
-            <div class="login-form__group">
-                <label class="login-form__label" for="email">Email</label>
-                <input class="login-form__input" for="email" id="email" name="email" autocomplete="off" placeholder="example@example.com">
+            <div class="form-group login-form__group">
+                <label class="form-group__label" for="email">Email</label>
+                <input class="form-group__input" id="email" name="email" autocomplete="off" placeholder="example@example.com">
             </div>
-            <div class="login-form__group">
-                <label class="login-form__label" for="password">Password</label>
-                <input class="login-form__input" type="password" id="password" name="password" autocomplete="off" placeholder="********">
+            <div class="form-group login-form__group">
+                <label class="form-group__label" for="password">Password</label>
+                <input class="form-group__input" type="password" id="password" name="password" autocomplete="off" placeholder="********">
             </div>
-            <div class="login-form__group">
-                <label class="login-form__label" for="rol">Rol</label>
-                <select class="login-form__select" name="rol" id="rol">
+            <div class="form-group login-form__group">
+                <label class="form-group__label" for="rol">Rol</label>
+                <select class="form-group__select" name="rol" id="rol">
                     <option value="">Seleccione un rol</option>
                     <option value="client">Cliente</option>
                     <option value="admin">Admin</option>
                 </select>
             </div>
             
-            <p id="error-message" class="login-form__error"></p>
-            <button class="login-form__btn" type="submit" class="btn-login">Ingresar</button>
-            <button class="login-form__btn" type="button" id="registerBtn" class="btn-register">Registrarse</button>
+            <p id="error-message" class="form-group__error"></p>
+            <button class="form__btn login-form__btn--submit" type="submit">Ingresar</button>
+            <button class="form__btn login-form__btn--secondary" type="button" id="registerBtn">Registrarse</button>
         </form>
 
     </main>

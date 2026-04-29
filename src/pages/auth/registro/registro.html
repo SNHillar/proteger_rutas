@@ -10,25 +10,25 @@
 </head>
 
 <body>
-    <main class="register-container">
-        <div class="logo-register">
-            <span class="logo-icon">🍕</span>
-            <h1>Food<span>Store</span></h1>
+    <main class="auth-card register-container">
+        <div class="main-logo register-container__logo logo-register">
+            <span class="main-logo__icon">🍕</span>
+            <h1 class="main-logo__text">Food<span class="main-logo__span">Store</span></h1>
         </div>
 
-        <h1> Registro</h1>
-        <form id="form">
+        <h1 class="auth-card__text">Registro</h1>
+        <form id="form" class="form register-form">
     
-            <div class="input-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" autocomplete="off" placeholder="example@example.com">
+            <div class="form-group register-form__group">
+                <label class="form-group__label" for="email">Email</label>
+                <input class="form-group__input" type="email" id="email" name="email" autocomplete="off" placeholder="example@example.com">
             </div>
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" autocomplete="off" placeholder="********">
+            <div class="form-group register-form__group">
+                <label class="form-group__label" for="password">Password</label>
+                <input class="form-group__input" type="password" id="password" name="password" autocomplete="off" placeholder="********">
             </div>
-            <p id="error-message" class="error-message"></p>
-            <button type="submit" class="btn-register">Registrar</button>
+            <p id="error-message" class="form-group__error"></p>
+            <button type="submit" class="form__btn form__btn--submit">Registrar</button>
         </form>
     </main>
     <script type="module" src="./registro.ts"></script>
