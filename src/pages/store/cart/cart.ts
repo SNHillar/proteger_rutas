@@ -1,10 +1,10 @@
 import type { CartItem } from "../../../types/product";
 
-const cartContainer = document.querySelector(".cart-items") as HTMLDivElement;
-const cartTotal = document.querySelector(".cart-total") as HTMLParagraphElement;
+const cartContainer = document.getElementById("cart-items") as HTMLDivElement;
+const cartTotal = document.getElementById("total-amount") as HTMLSpanElement;
 const logoutButton = document.getElementById("logout-btn") as HTMLButtonElement;
 
-logoutButton?.addEventListener("click", () => {
+logoutButton.addEventListener("click", () => {
     window.location.href = "/src/pages/auth/login/login.html";
 });
 
@@ -27,22 +27,27 @@ function renderCart() {
 
         const itemName = document.createElement("h4") as HTMLHeadingElement;
         itemName.textContent = item.nombre;
+        itemName.classList.add("cart-item__name");
 
         const itemsControlsDiv = document.createElement("div") as HTMLDivElement;
-        itemsControlsDiv.classList.add("item-controls");
+        itemsControlsDiv.classList.add("cart-item__controls", "item-controls");
 
         const decreaseButton = document.createElement("button") as HTMLButtonElement;
         decreaseButton.textContent = "-";
+        decreaseButton.classList.add("item-controls__btn", "decrease-btn");
 
         const quantitySpan = document.createElement("span") as HTMLSpanElement;
         quantitySpan.textContent = item.cantidad.toString();
+        quantitySpan.classList.add("item-controls__quantity");
 
         const increaseButton = document.createElement("button") as HTMLButtonElement;
         increaseButton.textContent = "+";
+        increaseButton.classList.add("item-controls__btn", "increase-btn");
 
-        
         const itemPrice = document.createElement("p") as HTMLParagraphElement;
         itemPrice.textContent = `Precio: $${item.precio} x ${item.cantidad}`;
+        itemPrice.classList.add("cart-item__price");
+
 
         itemsControlsDiv.append(decreaseButton, quantitySpan, increaseButton);
         cartItemDiv.append(itemName, itemPrice, itemsControlsDiv);
@@ -58,8 +63,8 @@ function renderCart() {
 
 function setupCartButtons( cartItems: CartItem[]) {
 
-    const decreaseButtons = document.querySelectorAll(".item-controls button:first-child") as NodeListOf<HTMLButtonElement>;
-    const increaseButtons = document.querySelectorAll(".item-controls button:last-child") as NodeListOf<HTMLButtonElement>;
+    const decreaseButtons = document.querySelectorAll(".decrease-btn") as NodeListOf<HTMLButtonElement>;
+    const increaseButtons = document.querySelectorAll(".increase-btn") as NodeListOf<HTMLButtonElement>;
     const clearCartButton = document.getElementById("clear-cart-btn") as HTMLButtonElement;
 
     decreaseButtons.forEach((button: HTMLButtonElement, index: number) => {

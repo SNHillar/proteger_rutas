@@ -8,43 +8,43 @@
     <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-container">
-            <div class="logo">
-                <span class="logo-icon">🍕</span>
-                <h1>Food<span>Store</span></h1>
+    <header class="store-header">
+        <div class="store-header__container header-container">
+            <div class="header-container__logo">
+                <span class="header-container__icon">🍕</span>
+                <h1 class="header-container__text">Food<span class="header-container__span">Store</span></h1>
             </div>
 
-            <nav class="main-nav">
-                <a href="../home/home.html" class="nav-link">
-                    <i class="icon">🏠</i> Catálogo
+            <nav class="header-container__nav nav-container">
+                <a href="../home/home.html" class="nav-container__link nav-link">
+                    <i class="nav-link__icon">🏠</i> Catálogo
                 </a>
-                <a href="../cart/cart.html" class="nav-link cart-link">
-                    <i class="icon">🛒</i> Carrito
-                    <span id="cart-count" class="badge">0</span>
+                <a href="../cart/cart.html" class="nav-container__link nav-link">
+                    <i class="nav-link__icon">🛒</i> Carrito
+                    <span id="cart-link" class="nav-link__span">0</span>
                 </a>
-                <button id="logout-btn" class="btn-logout" href="/src/pages/auth/login/login.html">Salir</button>
+                <button id="logout-btn" class="nav-container__btn" href="/src/pages/auth/login/login.html">Salir</button>
             </nav>
         </div>
     </header>
     <main class="store-layout">
-        <aside class="sidebar">
-            <section class="categorias-container">
-                <h2>Categorías</h2>
-                <ul id="categoriasList">
+        <aside class="store-layout__sidebar sidebar-container">
+            <section class="sidebar-container__categories">
+                <h2 class="sidebar-container__text">Categorías</h2>
+                <ul id="categoriasList" class="sidebar-container__ulist categories-list">
                     <!-- Category items will be dynamically inserted here -->
                 </ul>
             </section>
         </aside>
         <section class="content-area">
-            <section class="filters">
-                <div class="search-wrapper">
-                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
-                    <input type="text" class="search-input" id="searchInput" placeholder="Buscar productos..." autocomplete="off">
+            <section class="content-area__search search-section">
+                <div class="search-section__container search-container">
+                    <svg class="search-container__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+                    <input type="text" class="search-container__input" id="searchInput" placeholder="Buscar productos..." autocomplete="off">
                 </div>
             </section>
-            <section class="products-section">
-                <div class="products-container">
+            <section class="content-area__products products-section">
+                <div class="products-section__grid products-grid" id="productsGrid">
                     <!-- Product items will be dynamically inserted here -->
                 </div>
             </section>

@@ -26,7 +26,7 @@ body{
 
 /*---------------- ESTILOS DEL ENCABEZADO ----------------*/
 
-.main-header {
+.store-header {
     background-color: var(--primary-dark); /* Fondo verde oscuro */
     color: var(--white);
     padding: 1.2rem 0;
@@ -37,7 +37,7 @@ body{
     z-index: 1000;
 }
 
-.header-container{
+.store-header__container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,44 +46,44 @@ body{
 
 /*---------------- ESTILOS DEL LOGO ----------------*/
 
-.logo{
+.header-container__logo {
     display: flex;
     align-items: center;
 }
 
-.logo h1 {
+.header-container__text {
     color: var(--white);
-    /*al span le damos otro color*/
-    span{
-        color: var(--accent-orange);
-    }
     margin-left: 1rem;
+}
+
+.header-container__span {
+    color: var(--accent-orange);
 }
 
 /*---------------- ESTILOS DEL MENÚ DE NAVEGACIÓN ----------------*/
 
-.main-nav {
+.header-container__nav {
     display: flex;
     gap: 1.5rem;
     align-items: center;
 }
 
-.nav-link{
+.nav-container__link{
     color: #d8f3dc;
     transition: all 0.3s ease;
 }
 
-.nav-link:hover{
+.nav-container__link:hover{
     color:var(--accent-yellow);
     transform: scale(1.05);
 }
 
-.nav-link {
+.nav-container__link {
     text-decoration: none;
     color: var(--white);
 }
 
-.badge {
+.nav-link__span {
     background-color: var(--accent-orange);
     box-shadow: 0 0 8px rgba(251, 133, 0, 0.5);
     color: var(--white);
@@ -93,7 +93,7 @@ body{
 }
 
 
-.btn-logout {
+.nav-container__btn {
     background-color: transparent;
     border: 2px solid var(--white);
     color: var(--white);
@@ -103,7 +103,7 @@ body{
     transition: all 0.3s ease;
 }
 
-.btn-logout:hover {
+.nav-container__btn:hover {
     background-color: var(--white);
     color: var(--primary-dark);
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
@@ -119,20 +119,19 @@ body{
     padding: 0 20px;
 }
 
-.sidebar{
+.store-layout__sidebar {
     width: 250px;
     flex-shrink: 0;
 }
 
-/* -------------- ESTILOS DE LOS FILTROS --------------*/
 
 /* -------------- SECCIÓN DE BUSQUEDA --------------*/
 
-.filters{
+.content-area__search{
     margin: 1rem 0;
 }
 
-.search-input {
+.search-container__input {
     width: 100%;
     border: 1px solid var(--primary-light);
     padding: 0.7rem 3rem;
@@ -141,17 +140,17 @@ body{
     transition: border-color 0.3s;
 }
 
-.search-input:focus{
+.search-container__input:focus{
     border-color: var(--accent-orange);
     box-shadow: 0 0 8px rgba(251, 133, 0, 0.5);
     outline: none;
 }
 
-.search-wrapper {
+.search-section__container {
     position: relative;
 }
 
-.search-icon {
+.search-container__icon {
     position: absolute;
     left: 0.8rem;
     top: 50%;
@@ -162,14 +161,14 @@ body{
 
 /* -------------- SECCION DE CATEGORIAS --------------*/
 
-.categorias-container {
+.sidebar-container__categories {
     background-color: var(--white);
     padding: 1.2rem;
     border-radius: 4px;
     box-shadow: 0 4px 6px var(--shadow-color);
 }
 
-.categorias-container h2 {
+.sidebar-container__text {
     color: var(--primary-dark);
     margin-bottom: 1rem;
     font-size: 1.4rem;
@@ -178,12 +177,12 @@ body{
     margin-left: 1rem;
 }
 
-#categoriasList {
+.sidebar-container__categories ul {
     list-style: none;
     padding: 0;
 }
 
-#categoriasList li {
+.categories-list__item {
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
     cursor: pointer;
@@ -193,7 +192,7 @@ body{
     font-weight: 500;
 }
 
-#categoriasList li:hover {
+.categories-list__item:hover {
     background-color: var(--bg-cream);
     color: var(--accent-orange);
 }
@@ -206,7 +205,7 @@ body{
 
 /* -------------- ESTILOS DE LOS PRODUCT CARDS --------------*/
 
-.products-section {
+.content-area__products {
     width: 100%;
     flex-grow: 1;
     background-color: var(--white);
@@ -216,14 +215,14 @@ body{
 }
 
 
-.products-container{
+.products-section__grid{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
     padding: 1rem;
 }
 
-.product-card {
+.products-grid__card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -234,13 +233,13 @@ body{
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
-.product-card p{
+.product-card__category {
     color: var(--primary-light);
     font-size: 1.1rem;
     margin: 0.5rem 0;
 }
 
-.product-card img{
+.product-card__image{
     width: 100%;
     height: 150px;
     object-fit: cover;
@@ -248,19 +247,19 @@ body{
     border-top-right-radius: 8px;
 }
 
-.product-card .product-description {
+.product-card__description {
     color: var(--text-description);
     font-size: 0.9rem;
 }
 
-.product-card .product-price {
+.product-card__price {
     color: var(--primary-dark);
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 2rem;
 }
 
-.product-card button{
+.product-card__btn{
     background-color: var(--accent-orange);
     color: var(--white);
     border: none;
@@ -270,7 +269,7 @@ body{
     transition: all 0.3s ease;
 }
 
-.product-card h3{
+.product-card__name{
     color: var(--primary-dark);
     font-size: 1.2rem;
     margin-top: 1rem;
@@ -278,7 +277,7 @@ body{
     letter-spacing: 0.05em;
 }
 
-.product-card button:hover {
+.product-card__btn:hover {
     background-color: #e85d04; /* Un naranja más oscuro al presionar */
     box-shadow: 0 4px 12px rgba(232, 93, 4, 0.3);
 }
@@ -433,34 +432,49 @@ body{
 }
 
 
-.cart-section h2 {
+.cart-section__text {
     color: var(--primary-dark);
     margin-bottom: 1.5rem;
     text-align: center;
 }
 
-.cart-section strong {
+.cart-total__text {
     color: var(--primary-light);
     font-size: 1.2rem;
     margin-top: 1rem;
-    span{
-        margin-left: 0.5rem;
-    }
 }
 
-.cart-items{
+.cart-total__price {
+    margin-left: 0.5rem;
+}
+
+.cart-section__items {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    h4, p{
-        margin-bottom: 0.5rem;
-    }
     border: 1px solid var(--border--color);
     border-radius: 4px;
     padding: 1rem;
 }
 
-.btn-checkout{
+.cart-item__name{
+    margin-bottom: 0.5rem;
+}
+
+.cart-item__price{
+    margin-bottom: 0.5rem;
+}
+
+
+
+.cart-section__total{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+}
+
+.cart-section__btn{
     background-color: var(--accent-orange);
     color: var(--white);
     border: none;
@@ -471,37 +485,32 @@ body{
     margin-top: 1rem;
 }
 
-.btn-checkout:hover {
+.cart-section__btn--clear {
+    background-color: var(--white);
+    color: var(--primary-dark);
+    border: 1px solid var(--border--color);
+}
+
+.cart-section__btn--clear:hover {
+    background-color: var(--primary-light);
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(45, 106, 79, 0.3);
+}
+
+.cart-section__btn--checkout:hover {
     background-color: #e85d04; /* Un naranja más oscuro al presionar */
     box-shadow: 0 4px 12px rgba(232, 93, 4, 0.3);
 }
 
-.btn-clear-cart {
-    background-color: transparent;
-    border: 2px solid var(--accent-orange);
-    color: var(--accent-orange);
-    padding: 0.57rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-}
-
-.cart-total{
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 1rem;
-    font-size: 1.2rem;
-}
 
 
-.item-controls {
+.cart-item__controls {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.item-controls button {
+.item-controls__btn {
     background-color: var(--primary-light);
     color: var(--white);
     border: none;
@@ -511,7 +520,7 @@ body{
     transition: all 0.3s ease;
 }
 
-.item-controls button:hover {
+.item-controls__btn:hover {
     background-color: var(--accent-orange); /* Un naranja más oscuro al presionar */
     box-shadow: 0 4px 12px rgba(232, 93, 4, 0.3);
 }

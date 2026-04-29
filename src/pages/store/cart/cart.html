@@ -8,36 +8,36 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-container">
-            <div class="logo">
-                <span class="logo-icon">🍕</span>
-                <h1>Food<span>Store</span></h1>
+    <header class="store-header">
+        <div class="store-header__container header-container">
+            <div class="header-container__logo">
+                <span class="header-container__icon">🍕</span>
+                <h1 class="header-container__text">Food<span class="header-container__span">Store</span></h1>
             </div>
 
-            <nav class="main-nav">
-                <a href="../home/home.html" class="nav-link">
-                    <i class="icon">🏠</i> Catálogo
+            <nav class="header-container__nav nav-container">
+                <a href="../home/home.html" class="nav-container__link nav-link">
+                    <i class="nav-link__icon">🏠</i> Catálogo
                 </a>
-                <a href="../cart/cart.html" class="nav-link cart-link">
-                    <i class="icon">🛒</i> Carrito
-                    <span id="cart-count" class="badge">0</span>
+                <a href="../cart/cart.html" class="nav-container__link nav-link">
+                    <i class="nav-link__icon">🛒</i> Carrito
+                    <span id="cart-count" class="nav-link__span">0</span>
                 </a>
-                <button id="logout-btn" class="btn-logout">Salir</button>
+                <button id="logout-btn" class="nav-container__btn">Salir</button>
             </nav>
         </div>
     </header>
     <main>
         <section class="cart-section">
-            <h2>Carrito de Compras</h2>
-            <div id="cart-items" class="cart-items">
+            <h2 class="cart-section__text">Carrito de Compras</h2>
+            <div id="cart-items" class="cart-section__items cart-items">
                 <!-- Cart items will be dynamically inserted here -->
             </div>
-            <div class="cart-total">
-                <strong>Total: $<span id="total-amount">0.00</span></strong>
+            <div class="cart-section__total cart-total">
+                <strong class="cart-total__text">Total: $<span id="total-amount" class="cart-total__price">0.00</span></strong>
             </div>
-            <button id="clear-cart-btn" class="btn-clear-cart">Limpiar Carrito</button>
-            <button id="checkout-btn" class="btn-checkout">Finalizar Compra</button>
+            <button id="clear-cart-btn" class="cart-section__btn cart-section__btn--clear">Limpiar Carrito</button>
+            <button id="checkout-btn" class="cart-section__btn cart-section__btn--checkout">Finalizar Compra</button>
         </section>
     </main>
     <script type="module" src="/src/pages/store/cart/cart.js"></script>

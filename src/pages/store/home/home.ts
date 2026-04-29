@@ -2,11 +2,11 @@ import { getCategories, PRODUCTS } from "../../../data/data.js";
 import type { CartItem, Product } from "../../../types/product";
 
 // Seleccionamos los elementos del DOM que vamos a utilizar
-const productsContainer = document.querySelector(".products-container") as HTMLDivElement;
+const productsContainer = document.getElementById("productsGrid") as HTMLDivElement;
 const logoutButton = document.getElementById("logout-btn") as HTMLButtonElement;
 
 // Si el botón de logout existe, le agregamos un evento para redirigir al login
-logoutButton?.addEventListener("click", () => {
+logoutButton.addEventListener("click", () => {
     window.location.href = "/src/pages/auth/login/login.html";
 });
 
@@ -22,31 +22,34 @@ function renderProducts(products: Product[]) {
     // Iteramos sobre los productos y creamos las tarjetas correspondientes
     products.forEach((product: Product) => {
         const productCard = document.createElement("div") as HTMLDivElement;
-        productCard.classList.add("product-card");
+        productCard.classList.add("products-grid__card", "product-card");
 
         const productImage = document.createElement("img") as HTMLImageElement;
+        productImage.classList.add("product-card__image");
         productImage.src = product.imagen;
         productImage.alt = product.nombre;
 
         const productCategory = document.createElement("p") as HTMLParagraphElement;
         productCategory.textContent = product.categorias.map((cat: { nombre: string }) => cat.nombre).join(", ").toUpperCase();
+        productCategory.classList.add("product-card__category");
 
         const productDescription = document.createElement("p") as HTMLParagraphElement;
         productDescription.textContent = product.descripcion;
-        productDescription.classList.add("product-description");
+        productDescription.classList.add("product-card__description");
         
         const productName = document.createElement("h3") as HTMLHeadingElement;
         productName.textContent = product.nombre;
+        productName.classList.add("product-card__name");
         
         const productPrice = document.createElement("p") as HTMLParagraphElement;
         productPrice.textContent = `$${product.precio}`;
-        productPrice.classList.add("product-price");
+        productPrice.classList.add("product-card__price");
         
         const addToCartButton = document.createElement("button") as HTMLButtonElement;
         addToCartButton.textContent = "Agregar al carrito";
-
+        addToCartButton.classList.add("product-card__btn");
         // Evento para agregar el producto al carrito
-        addToCartButton?.addEventListener("click", () => {
+        addToCartButton.addEventListener("click", () => {
 
             // Obtenemos el carrito actual del localStorage o inicializamos uno nuevo
             const cartItem: CartItem [] = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -77,8 +80,8 @@ function renderProducts(products: Product[]) {
 
 
         // Agregamos los elementos a la tarjeta y luego la tarjeta al contenedor
-        productCard?.append(productImage, productCategory, productDescription, productName, productPrice, addToCartButton);
-        productsContainer?.appendChild(productCard);
+        productCard.append(productImage, productCategory, productDescription, productName, productPrice, addToCartButton);
+        productsContainer.appendChild(productCard);
     });
 
 };
@@ -86,7 +89,7 @@ function renderProducts(products: Product[]) {
 // Función para manejar la búsqueda de productos
 const searchInput = document.getElementById("searchInput") as HTMLInputElement;
 
-    searchInput?.addEventListener("input", () => {
+    searchInput.addEventListener("input", () => {
         const searchTerm = searchInput.value.toLowerCase();
         const filteredProducts = PRODUCTS.filter((product) =>
             product.nombre.toLowerCase().includes(searchTerm)
@@ -107,7 +110,7 @@ function renderCategories() {
     // Opción para mostrar todos los productos
     const allItem = document.createElement("li") as HTMLLIElement;
         allItem.textContent = "Todas";
-        allItem.classList.add("category-item");
+        allItem.classList.add("categories-list__item");
 
         allItem.addEventListener("click", () => {
             renderProducts(PRODUCTS);
@@ -120,7 +123,7 @@ function renderCategories() {
 
         const categoryItem = document.createElement("li") as HTMLLIElement;
         categoryItem.textContent = categoria.nombre;
-        categoryItem.classList.add("category-item");
+        categoryItem.classList.add("categories-list__item");
         categoriasList?.appendChild(categoryItem);
         
         // Evento para filtrar los productos por categoría al hacer clic en el nombre de la categoría
