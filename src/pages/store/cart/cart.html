@@ -9,32 +9,32 @@
 </head>
 <body>
     <header class="store-header">
-        <div class="store-header__container header-container">
-            <div class="header-container__logo">
-                <span class="header-container__icon">🍕</span>
-                <h1 class="header-container__text">Food<span class="header-container__span">Store</span></h1>
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo__icon">🍕</span>
+                <h1 class="logo__text">Food<span class="logo__span">Store</span></h1>
             </div>
 
-            <nav class="header-container__nav nav-container">
-                <a href="../home/home.html" class="nav-container__link nav-link">
+            <nav class="nav">
+                <a href="../home/home.html" class="nav__link">
                     <i class="nav-link__icon">🏠</i> Catálogo
                 </a>
-                <a href="../cart/cart.html" class="nav-container__link nav-link">
+                <a href="../cart/cart.html" class="nav__link">
                     <i class="nav-link__icon">🛒</i> Carrito
                     <span id="cart-count" class="nav-link__span">0</span>
                 </a>
-                <button id="logout-btn" class="nav-container__btn">Salir</button>
+                <button id="logout-btn" class="nav__btn">Salir</button>
             </nav>
         </div>
     </header>
     <main>
         <section class="cart-section">
             <h2 class="cart-section__text">Carrito de Compras</h2>
-            <div id="cart-items" class="cart-section__items cart-items">
+            <div id="cart-items" class="cart-container">
                 <!-- Cart items will be dynamically inserted here -->
             </div>
-            <div class="cart-section__total cart-total">
-                <strong class="cart-total__text">Total: $<span id="total-amount" class="cart-total__price">0.00</span></strong>
+            <div class="cart-total">
+                <strong class="cart-total__text"><span id="total-amount" class="cart-total__price">0.00</span></strong>
             </div>
             <button id="clear-cart-btn" class="cart-section__btn cart-section__btn--clear">Limpiar Carrito</button>
             <button id="checkout-btn" class="cart-section__btn cart-section__btn--checkout">Finalizar Compra</button>

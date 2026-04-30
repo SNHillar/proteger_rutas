@@ -22,32 +22,32 @@ function renderProducts(products: Product[]) {
     // Iteramos sobre los productos y creamos las tarjetas correspondientes
     products.forEach((product: Product) => {
         const productCard = document.createElement("div") as HTMLDivElement;
-        productCard.classList.add("products-grid__card", "product-card");
+        productCard.classList.add("card");
 
         const productImage = document.createElement("img") as HTMLImageElement;
-        productImage.classList.add("product-card__image");
+        productImage.classList.add("card__image");
         productImage.src = product.imagen;
         productImage.alt = product.nombre;
 
         const productCategory = document.createElement("p") as HTMLParagraphElement;
         productCategory.textContent = product.categorias.map((cat: { nombre: string }) => cat.nombre).join(", ").toUpperCase();
-        productCategory.classList.add("product-card__category");
+        productCategory.classList.add("card__category");
 
         const productDescription = document.createElement("p") as HTMLParagraphElement;
         productDescription.textContent = product.descripcion;
-        productDescription.classList.add("product-card__description");
+        productDescription.classList.add("card__description");
         
         const productName = document.createElement("h3") as HTMLHeadingElement;
         productName.textContent = product.nombre;
-        productName.classList.add("product-card__name");
+        productName.classList.add("card__name");
         
         const productPrice = document.createElement("p") as HTMLParagraphElement;
         productPrice.textContent = `$${product.precio}`;
-        productPrice.classList.add("product-card__price");
+        productPrice.classList.add("card__price");
         
         const addToCartButton = document.createElement("button") as HTMLButtonElement;
         addToCartButton.textContent = "Agregar al carrito";
-        addToCartButton.classList.add("product-card__btn");
+        addToCartButton.classList.add("card__btn");
         // Evento para agregar el producto al carrito
         addToCartButton.addEventListener("click", () => {
 
@@ -110,7 +110,7 @@ function renderCategories() {
     // Opción para mostrar todos los productos
     const allItem = document.createElement("li") as HTMLLIElement;
         allItem.textContent = "Todas";
-        allItem.classList.add("categories-list__item");
+        allItem.classList.add("sidebar__item");
 
         allItem.addEventListener("click", () => {
             renderProducts(PRODUCTS);
@@ -123,7 +123,7 @@ function renderCategories() {
 
         const categoryItem = document.createElement("li") as HTMLLIElement;
         categoryItem.textContent = categoria.nombre;
-        categoryItem.classList.add("categories-list__item");
+        categoryItem.classList.add("sidebar__item");
         categoriasList?.appendChild(categoryItem);
         
         // Evento para filtrar los productos por categoría al hacer clic en el nombre de la categoría

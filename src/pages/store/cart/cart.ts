@@ -30,7 +30,7 @@ function renderCart() {
         itemName.classList.add("cart-item__name");
 
         const itemsControlsDiv = document.createElement("div") as HTMLDivElement;
-        itemsControlsDiv.classList.add("cart-item__controls", "item-controls");
+        itemsControlsDiv.classList.add("item__controls");
 
         const decreaseButton = document.createElement("button") as HTMLButtonElement;
         decreaseButton.textContent = "-";
