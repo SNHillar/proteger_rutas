@@ -48,4 +48,8 @@ function showError(message: string) {
   const errorMessage = document.getElementById("error-message") as HTMLParagraphElement;
   errorMessage.textContent = message;
   errorMessage.style.display = "block";
+
+  setTimeout(() => {
+    errorMessage.style.display = "none";
+  }, 3000);
 }

@@ -78,9 +78,20 @@ function renderProducts(products: Product[]) {
             }, 1000);
         });
 
+        
+        const productDetailButton = document.createElement("button") as HTMLButtonElement;
+        productDetailButton.textContent = "Ver detalles";
+        productDetailButton.classList.add("card__btn", "card__btn--secondary");
+        // Evento para redirigir a la página de detalles del producto
+        productDetailButton.addEventListener("click", () => {
+            window.location.href = `/src/pages/store/productDetail/productDetail.html?id=${product.id}`;
+         }
+    
+    );
+
 
         // Agregamos los elementos a la tarjeta y luego la tarjeta al contenedor
-        productCard.append(productImage, productCategory, productDescription, productName, productPrice, addToCartButton);
+        productCard.append(productImage, productCategory, productDescription, productName, productPrice, addToCartButton, productDetailButton);
         productsContainer.appendChild(productCard);
     });
 
