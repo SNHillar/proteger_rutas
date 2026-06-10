@@ -3,14 +3,14 @@
     --primary-light: #2d6a4f;  /* Verde medio */
     --accent-orange: #f26d00;  /* Naranja vibrante (Ideal para botones de acción) */
     --accent-yellow: #ffb703;  /* Amarillo mostaza (Para detalles o precios) */
-    --bg-cream: #FFF9EB;       /* Crema muy suave (Más cálido que el blanco puro) */
+    --bg-cream: #FFFFEF;       /* Crema muy suave (Más cálido que el blanco puro) */
     --text-dark: #081c15;      /* Casi negro para lectura */
     --text-description: #555555;
-    --white: #f8f9ff;
+    --white: #fafffe;
     --border--color: #cccccc;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --error-color: #ec2222;
-    --bg-sidebar: #eff4ff;
+    --bg-sidebar: #effeef;
 }
 
 *{
@@ -107,17 +107,17 @@ body{
 }
 
 .search__input {
+    background-color: var(--bg-sidebar);
     width: 100%;
-    border: 1px solid var(--primary-light);
+    border: 1px solid var(--border--color);
     padding: 0.7rem 3rem;
-    border: 2px solid var(--primary-light);
     border-radius: 30px;
     transition: border-color 0.3s;
 }
 
 .search__input:focus{
     border-color: var(--accent-orange);
-    box-shadow: 0 0 8px rgba(251, 133, 0, 0.5);
+    box-shadow: 0 0 6px rgba(245, 149, 40, 0.8);
     outline: none;
 }
 
@@ -211,9 +211,13 @@ body{
 }
 
 .card__category {
-    color: var(--primary-light);
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
+    background-color: var(--primary-light);
+    border-radius: 4px;
+    color: var(--white);
+    margin-top: 0.5rem;
+    padding: 0.1rem 0.4rem;
+    display: flex;
+    position: absolute;
 }
 
 .card__image{
@@ -233,25 +237,25 @@ body{
     color: var(--primary-dark);
     font-size: 1.5rem;
     font-weight: bold;
-    margin-top: 2rem;
+    margin-top: 0.6rem;
+    margin-bottom: 1rem;
 }
 
 .card__btn{
     background-color: var(--accent-orange);
-    color: var(--white);
+    color: var(--primary-dark);
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .card__name{
     color: var(--primary-dark);
-    font-size: 0.9rem;
+    font-size: 1.4rem;
     margin-top: 1rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
 }
 
 .card__btn:hover {

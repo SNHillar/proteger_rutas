@@ -1,5 +1,4 @@
 import { getCategories, PRODUCTS } from "../../../data/data.js";
-import type { ICategory } from "../../../types/category.ts";
 import type { CartItem, Product } from "../../../types/product";
 import {CATEGORY_ICONS} from "../../../utils/icons.ts";
 
@@ -93,7 +92,7 @@ function renderProducts(products: Product[]) {
 
 
         // Agregamos los elementos a la tarjeta y luego la tarjeta al contenedor
-        productCard.append(productImage, productCategory, productDescription, productName, productPrice, addToCartButton, productDetailButton);
+        productCard.append(productCategory, productImage, productName, productDescription, productPrice, productDetailButton);
         productsContainer.appendChild(productCard);
     });
 
@@ -112,7 +111,7 @@ const searchInput = document.getElementById("searchInput") as HTMLInputElement;
 
 // Renderizado inicial de productos y categorías
 
-function renderCategories(categories: ICategory[] ) {
+function renderCategories() {
     const categoriasList = document.getElementById("categoriasList") as HTMLUListElement;
     const categorias = getCategories();
 
@@ -167,5 +166,5 @@ function updateCartBadge() {
 // Renderizado inicial
 
 renderProducts(PRODUCTS);
-renderCategories(getCategories());
+renderCategories();
 updateCartBadge();
