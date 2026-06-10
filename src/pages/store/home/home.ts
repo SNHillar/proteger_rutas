@@ -1,5 +1,7 @@
 import { getCategories, PRODUCTS } from "../../../data/data.js";
+import type { ICategory } from "../../../types/category.ts";
 import type { CartItem, Product } from "../../../types/product";
+import {CATEGORY_ICONS} from "../../../utils/icons.ts";
 
 // Seleccionamos los elementos del DOM que vamos a utilizar
 const productsContainer = document.getElementById("productsGrid") as HTMLDivElement;
@@ -110,7 +112,7 @@ const searchInput = document.getElementById("searchInput") as HTMLInputElement;
 
 // Renderizado inicial de productos y categorías
 
-function renderCategories() {
+function renderCategories(categories: ICategory[] ) {
     const categoriasList = document.getElementById("categoriasList") as HTMLUListElement;
     const categorias = getCategories();
 
@@ -120,7 +122,7 @@ function renderCategories() {
 
     // Opción para mostrar todos los productos
     const allItem = document.createElement("li") as HTMLLIElement;
-        allItem.textContent = "Todas";
+        allItem.innerHTML = `<span class="category-icon">${CATEGORY_ICONS["Todas"]}</span> Todas`;
         allItem.classList.add("sidebar__item");
 
         allItem.addEventListener("click", () => {
@@ -132,8 +134,10 @@ function renderCategories() {
         // Iteramos sobre las categorías y creamos los elementos correspondientes
     categorias.forEach((categoria: { nombre: string; id: number }) => {
 
+        const svgIcon = CATEGORY_ICONS[categoria.nombre] || "";
+
         const categoryItem = document.createElement("li") as HTMLLIElement;
-        categoryItem.textContent = categoria.nombre;
+        categoryItem.innerHTML = `<span class="category-icon">${svgIcon}</span> ${categoria.nombre}`;
         categoryItem.classList.add("sidebar__item");
         categoriasList?.appendChild(categoryItem);
         
@@ -163,5 +167,5 @@ function updateCartBadge() {
 // Renderizado inicial
 
 renderProducts(PRODUCTS);
-renderCategories();
+renderCategories(getCategories());
 updateCartBadge();
