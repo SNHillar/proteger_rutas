@@ -36,9 +36,26 @@
         <div class="product-detail__info">
             <h2 id="detailTitle" class="product-detail__title"></h2>
             <p id="detailDescription" class="product-detail__description"></p>
+            <span id="detailBadge" class="product-detail__badge">Disponible (Stock: 30)</span>
+            <p id="detailPrice" class="product-detail__price"></p>
+
+            <div class="product-detail__quantity--wrapper">
+                <span class="product-detail__quantity-label">Cantidad: </span>
+                <div class="quantity-controls">
+                    <button id="decreaseBtn" class="quantity-controls__btn">-</button>
+                    <span id="quantityValue" class="quantity-controls__value">1</span>
+                    <button id="increaseBtn" class="quantity-controls__btn">+</button>
+                </div>
             </div>
+
+            <div class="product-detail__actions">
+                <button id="addToCartBtn" class="product-detail__add-btn">🛒 Agregar al Carrito</button>
+                <button id="backButton" class="product-detail__back-btn">← Volver</button>
+            </div>
+        </div>
     </section>
     </main>
     
 </body>
+    <script type="module" src="/src/pages/store/productDetail/productDetail.ts"></script>
 </html>
