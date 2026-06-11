@@ -28,7 +28,7 @@ form.addEventListener("submit", (e: SubmitEvent) => {
   if (userFound.role === valueRol) {
     userFound.loggedIn = true;
     if (userFound.role === "admin") {
-      navigate("/src/pages/admin/home/adminHome.html");
+      navigate("/src/pages/admin/home/admin-home.html");
     } else if (userFound.role === "client") {
       navigate("/src/pages/store/home/home.html");
     }

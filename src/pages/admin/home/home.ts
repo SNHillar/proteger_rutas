@@ -1,7 +1,7 @@
 import { checkAuhtUser, logout } from "../../../utils/auth";
 
 const buttonLogout = document.getElementById(
-  "logoutButton"
+  "logout-btn"
 ) as HTMLButtonElement;
 buttonLogout?.addEventListener("click", () => {
   logout();

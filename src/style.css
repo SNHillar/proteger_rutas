@@ -172,10 +172,19 @@ body{
     flex-shrink: 0;
 }
 
+.sidebar__item--active{
+    background-color: #fff5f3; /* Un fondo rojito/naranja muy sutil */
+    color: var(--accent-orange);
+    border-left-color: #ff5a36;
+    font-weight: 600;
+}
+
 .sidebar__item:hover {
     background-color: var(--bg-cream);
     color: var(--accent-orange);
 }
+
+
 
 /*------------- ESTILOS CONTENT AREA ------------------*/
 
@@ -265,6 +274,7 @@ body{
 .card__btn:hover {
     background-color: #e85d04; /* Un naranja más oscuro al presionar */
     box-shadow: 0 4px 12px rgba(232, 93, 4, 0.3);
+    font-weight: bold;
 }
 
 .card:hover {
@@ -670,14 +680,24 @@ body{
     font-size: 1.2rem;
 }
 
-.admin-nav__link.active {
+.admin-nav__link--active {
     background-color: var(--primary-light);
     color: var(--white);
     box-shadow: 0 4px 12px rgba(45, 106, 79, 0.3);
 }
 
+.admin-nav__link--active:hover {
+    color: var(--primary-dark);
+}
+
 .admin-nav__link:hover {
     background-color: var(--shadow-color);
+}
+
+.admin-nav__divider {
+    height: 1px;
+    background-color: var(--border--color);
+    margin: 1.5rem 1.5rem;
 }
 
 
@@ -793,6 +813,50 @@ body{
     font-size: 0.95rem;
     margin: 0;
 }
+
+/* ADMIN-PRODUCTS STYLES */
+
+.admin-toolbar{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem
+}
+
+.admin-toolbar__title-group{
+    font-size: 1.2rem;
+}
+
+.admin-toolbar__actions{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.admin-search {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.admin-search__icon {
+    position: absolute;
+    left: 12px;
+    color: #6c757d;
+}
+
+.admin-search__input {
+    padding: 0.6rem 1rem 0.6rem 2.2rem;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    width: 240px;
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
 
 /* MEDIAS QUERIES*/
 

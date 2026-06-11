@@ -121,33 +121,48 @@ function renderCategories() {
 
     // Opción para mostrar todos los productos
     const allItem = document.createElement("li") as HTMLLIElement;
+
         allItem.innerHTML = `<span class="category-icon">${CATEGORY_ICONS["Todas"]}</span> Todas`;
         allItem.classList.add("sidebar__item");
 
         allItem.addEventListener("click", () => {
+            setActiveCategory(allItem);
             renderProducts(PRODUCTS);
         });
 
-        categoriasList?.appendChild(allItem);
+        categoriasList.appendChild(allItem);
     
         // Iteramos sobre las categorías y creamos los elementos correspondientes
     categorias.forEach((categoria: { nombre: string; id: number }) => {
 
+        
         const svgIcon = CATEGORY_ICONS[categoria.nombre] || "";
-
+        
         const categoryItem = document.createElement("li") as HTMLLIElement;
         categoryItem.innerHTML = `<span class="category-icon">${svgIcon}</span> ${categoria.nombre}`;
         categoryItem.classList.add("sidebar__item");
         categoriasList?.appendChild(categoryItem);
         
         // Evento para filtrar los productos por categoría al hacer clic en el nombre de la categoría
-        categoryItem?.addEventListener("click", () => {
+        categoryItem.addEventListener("click", () => {
+            setActiveCategory(categoryItem);
             const filteredProducts = PRODUCTS.filter((product: Product) =>
                 product.categorias.some((cat: { id: number }) => cat.id === categoria.id)
             );
+            
             renderProducts(filteredProducts);
         });
     });
+}
+
+function setActiveCategory(element: HTMLLIElement) {
+    // Quita la clase active de todos los items
+    document.querySelectorAll(".sidebar__item").forEach(item => {
+        item.classList.remove("sidebar__item--active");
+    });
+
+    // Activa el seleccionado
+    element.classList.add("sidebar__item--active");
 }
 
 // Función para actualizar el contador del carrito en el header

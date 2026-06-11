@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
+    <title>Administrador Productos</title>
     <link rel="stylesheet" href="/src/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
             </div>
 
             <nav class="nav">
-                <a href="../home/home.html" class="nav__link">
+                <a href="../../store/home/home.html" class="nav__link">
                     <i class="nav-link__icon"></i> Catálogo
                 </a>
                 <a href="../cart/cart.html" class="nav__link">
@@ -39,16 +39,16 @@
         <aside class="admin-sidebar">
             
             <nav class="admin-nav">
-                <a href="#" class="admin-nav__link admin-nav__link--active">
+                <a href="../home/admin-home.html" class="admin-nav__link">
                     <span class="admin-nav__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chart-histogram"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 3v18h18" /><path d="M20 18v3" /><path d="M16 16v5" /><path d="M12 13v8" /><path d="M8 16v5" /><path d="M3 11c6 0 5 -5 9 -5s3 5 9 5" /></svg></span> Dashboard
                 </a>
-                <a href="#" class="admin-nav__link">
+                <a href="../categories/admin-categories.html" class="admin-nav__link">
                     <span class="admin-nav__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-category"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 4h6v6h-6l0 -6" /><path d="M14 4h6v6h-6l0 -6" /><path d="M4 14h6v6h-6l0 -6" /><path d="M14 17a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /></svg></span> Categorías
                 </a>
-                <a href="#" class="admin-nav__link">
+                <a href="../products/admin-products.html" class="admin-nav__link admin-nav__link--active">
                     <span class="admin-nav__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-building-store"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 21l18 0" /><path d="M3 7v1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1m0 1a3 3 0 0 0 6 0v-1h-18l2 -4h14l2 4" /><path d="M5 21l0 -10.15" /><path d="M19 21l0 -10.15" /><path d="M9 21v-4a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v4" /></svg></span> Productos
                 </a>
-                <a href="#" class="admin-nav__link">
+                <a href="../orders/admin-orders.html" class="admin-nav__link">
                     <span class="admin-nav__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-box"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" /><path d="M12 12l8 -4.5" /><path d="M12 12l0 9" /><path d="M12 12l-8 -4.5" /></svg></span> Pedidos
                 </a>
                 
@@ -62,59 +62,53 @@
 
         <main class="admin-content">
 
-        <div class="admin-content__header">
-            <h2 class="admin-content__title">Panel de Administración</h2>
+        <section class="admin-toolbar">
+            <div class="admin-toolbar__title-group">
+                <h2 class="admin-content__title">Gestión de Productos</h2>
+            </div>
+        
+        <div class="admin-toolbar__actions">
+            <div class="admin-search">
+                <span class="admin-search__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg></span>
+                <input type="text" class="admin-search__input" placeholder="Buscar producto...">
+            </div>
+
+            <select class="admin-filter">
+                <option value="all">Todas las categorías</option>
+                <option value="pizzas">Pizzas</option>
+                <option value="hamburguesas">Hamburguesas</option>
+            </select>
+
+            <button class="admin-btn-add">+ Nuevo Producto</button>
         </div>
+    </section>
 
-        <section class="dashboard-grid">
+    <section class="admin-cards-grid">
+        
+        <article class="management-card">
+            <div class="management-card__media">
+                <img src="../../../assets/hamburguesa.webp" alt="Hamburguesa" class="management-card__img">
+                <span class="management-card__badge">Stock: 30</span>
+            </div>
             
-            <div class="dashboard-card dashboard-card--purple">
-                <div class="dashboard-card__header">
-                    <span class="dashboard-card__icon">📁</span>
-                    <h3 class="dashboard-card__title">Categorías</h3>
+            <div class="management-card__content">
+                <h3 class="management-card__name">Hamburguesa Triple Smash</h3>
+                <p class="management-card__category">Categoría: Hamburguesas</p>
+                <p class="management-card__price">$25000.00</p>
+                
+                <div class="management-card__actions">
+                    <button class="btn-icon-action btn-icon-action--edit" title="Editar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415" /><path d="M16 5l3 3" /></svg><span class="btn-icon-action__text">Editar</span>
+                    </button>
+                    <button class="btn-icon-action btn-icon-action--delete" title="Eliminar">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg><span class="btn-icon-action__text">Eliminar</span>
+                    </button>
                 </div>
-                <p class="dashboard-card__number">0</p>
-                <button class="dashboard-card__btn">Gestionar</button>
             </div>
+        </article>
 
-            <div class="dashboard-card dashboard-card--pink">
-                <div class="dashboard-card__header">
-                    <span class="dashboard-card__icon">🍔</span>
-                    <h3 class="dashboard-card__title">Productos</h3>
-                </div>
-                <p class="dashboard-card__number">0</p>
-                <button class="dashboard-card__btn">Gestionar</button>
-            </div>
-
-            <div class="dashboard-card dashboard-card--cyan">
-                <div class="dashboard-card__header">
-                    <span class="dashboard-card__icon">📦</span>
-                    <h3 class="dashboard-card__title">Pedidos</h3>
-                </div>
-                <p class="dashboard-card__number">0</p>
-                <button class="dashboard-card__btn">Gestionar</button>
-            </div>
-
-            <div class="dashboard-card dashboard-card--green">
-                <div class="dashboard-card__header">
-                    <span class="dashboard-card__icon">✅</span>
-                    <h3 class="dashboard-card__title">Disponibles</h3>
-                </div>
-                <p class="dashboard-card__number">0</p>
-                <span class="dashboard-card__footer-text">Productos activos</span>
-            </div>
-
-        </section>
-
-        <section class="summary-section">
-            <div class="summary-card">
-                <h3 class="summary-card__title">📊 Resumen Rápido</h3>
-                <p class="summary-card__text">Cargando estadísticas...</p>
-            </div>
         </section>
     </main>
-
     </div>
-    
 </body>
 </html>
