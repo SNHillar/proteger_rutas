@@ -12,7 +12,7 @@ const initPage = () => {
   console.log("inicio de pagina");
   checkAuhtUser(
     "/src/pages/auth/login/login.html",
-    "/src/pages/admin/home/home.html",
+    "/src/pages/admin/home/client-home.html",
     "client"
   );
 };
