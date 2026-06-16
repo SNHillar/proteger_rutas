@@ -2,18 +2,18 @@ import type { ICategory } from "./category";
 
 export interface Product {
     id: number;
-    eliminado: boolean;
+    deleted: boolean;
     createdAt: string;
-    nombre: string;
-    precio: number;
-    descripcion: string;
+    name: string;
+    price: number;
+    description: string;
     stock: number;
-    imagen: string;
-    disponible: boolean;
-    categorias: ICategory[];
+    image: string;
+    available: boolean;
+    categories: ICategory[];
 }
 
 
 export interface CartItem extends Product {
-    cantidad: number;
+    quantity: number;
 }

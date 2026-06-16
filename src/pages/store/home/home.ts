@@ -27,23 +27,23 @@ function renderProducts(products: Product[]) {
 
         const productImage = document.createElement("img") as HTMLImageElement;
         productImage.classList.add("card__image");
-        productImage.src = product.imagen;
-        productImage.alt = product.nombre;
+        productImage.src = product.image;
+        productImage.alt = product.name;
 
         const productCategory = document.createElement("p") as HTMLParagraphElement;
-        productCategory.textContent = product.categorias.map((cat: { nombre: string }) => cat.nombre).join(", ").toUpperCase();
+        productCategory.textContent = product.categories.map((cat: { name: string }) => cat.name).join(", ").toUpperCase();
         productCategory.classList.add("card__category");
 
         const productDescription = document.createElement("p") as HTMLParagraphElement;
-        productDescription.textContent = product.descripcion;
+        productDescription.textContent = product.description;
         productDescription.classList.add("card__description");
 
         const productName = document.createElement("h3") as HTMLHeadingElement;
-        productName.textContent = product.nombre;
+        productName.textContent = product.name;
         productName.classList.add("card__name");
 
         const productPrice = document.createElement("p") as HTMLParagraphElement;
-        productPrice.textContent = `$${product.precio}`;
+        productPrice.textContent = `$${product.price}`;
         productPrice.classList.add("card__price");
 
         const addToCartButton = document.createElement("button") as HTMLButtonElement;
@@ -60,9 +60,9 @@ function renderProducts(products: Product[]) {
 
             // Si el producto ya está en el carrito, incrementamos la cantidad, de lo contrario, lo agregamos con cantidad 1
             if (existingItemIndex !== -1) {
-                cartItem[existingItemIndex].cantidad++;
+                cartItem[existingItemIndex].quantity++;
             } else {
-                cartItem.push({ ...product, cantidad: 1 });
+                cartItem.push({ ...product, quantity: 1 });
             }
 
             // Guardamos el carrito actualizado en el localStorage
@@ -104,7 +104,7 @@ const searchInput = document.getElementById("searchInput") as HTMLInputElement;
 searchInput.addEventListener("input", () => {
     const searchTerm = searchInput.value.toLowerCase();
     const filteredProducts = PRODUCTS.filter((product) =>
-        product.nombre.toLowerCase().includes(searchTerm)
+        product.name.toLowerCase().includes(searchTerm)
     );
     renderProducts(filteredProducts);
 });
@@ -133,13 +133,13 @@ function renderCategories() {
     categoriasList.appendChild(allItem);
 
     // Iteramos sobre las categorías y creamos los elementos correspondientes
-    categorias.forEach((categoria: { nombre: string; id: number }) => {
+    categorias.forEach((categoria: { name: string; id: number }) => {
 
 
-        const svgIcon = CATEGORY_ICONS[categoria.nombre] || "";
+        const svgIcon = CATEGORY_ICONS[categoria.name] || "";
 
         const categoryItem = document.createElement("li") as HTMLLIElement;
-        categoryItem.innerHTML = `<span class="category-icon">${svgIcon}</span> ${categoria.nombre}`;
+        categoryItem.innerHTML = `<span class="category-icon">${svgIcon}</span> ${categoria.name}`;
         categoryItem.classList.add("sidebar__item");
         categoriasList?.appendChild(categoryItem);
 
@@ -147,7 +147,7 @@ function renderCategories() {
         categoryItem.addEventListener("click", () => {
             setActiveCategory(categoryItem);
             const filteredProducts = PRODUCTS.filter((product: Product) =>
-                product.categorias.some((cat: { id: number }) => cat.id === categoria.id)
+                product.categories.some((cat: { id: number }) => cat.id === categoria.id)
             );
 
             renderProducts(filteredProducts);
@@ -172,7 +172,7 @@ function updateCartBadge() {
     const cartItems: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
     const badge = document.getElementById("cart-count") as HTMLSpanElement;
     if (badge) {
-        const totalCount = cartItems.reduce((sum: number, item: CartItem) => sum + item.cantidad, 0);
+        const totalCount = cartItems.reduce((sum: number, item: CartItem) => sum + item.quantity, 0);
         badge.textContent = totalCount.toString();
         badge.style.display = totalCount > 0 ? "inline-block" : "none";
     }

@@ -982,6 +982,10 @@ body {
     gap: 4px 24px;
 }
 
+.management-card__content--categories{
+    padding: 1rem;
+}
+
 .management-card__name {
     grid-area: name;
     font-size: 1.15rem;

@@ -1,6 +1,6 @@
 import type { ICategory } from "../types/category";
 
-const API_URL = 'http://localhost:8080/api/categorias';
+const API_URL = 'http://localhost:8080/api/categories';
 
 export const CategoriaService = {
 
@@ -11,11 +11,11 @@ export const CategoriaService = {
   },
 
 
-  async create(nombre: string, descripcion: string) {
+  async create (name: string, description: string) {
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nombre, descripcion })
+      body: JSON.stringify({ name, description })
     });
 
     if (response.status === 403 || response.status === 401) {
