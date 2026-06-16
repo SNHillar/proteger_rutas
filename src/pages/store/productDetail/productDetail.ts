@@ -13,11 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const backButton = document.getElementById("backButton") as HTMLButtonElement;
 
 
-    
+
     const urlParams = new URLSearchParams(window.location.search);
     const productId = parseInt(urlParams.get("id") || "0");
 
-    const productoEncontrado : Product | undefined = PRODUCTS.find((p: Product) => p.id === productId);
+    const productoEncontrado: Product | undefined = PRODUCTS.find((p: Product) => p.id === productId);
 
     if (!productoEncontrado) {
         alert("Producto no encontrado");

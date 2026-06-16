@@ -1,6 +1,6 @@
 import { getCategories, PRODUCTS } from "../../../data/data.js";
 import type { CartItem, Product } from "../../../types/product";
-import {CATEGORY_ICONS} from "../../../utils/icons.ts";
+import { CATEGORY_ICONS } from "../../../utils/icons.ts";
 
 // Seleccionamos los elementos del DOM que vamos a utilizar
 const productsContainer = document.getElementById("productsGrid") as HTMLDivElement;
@@ -37,15 +37,15 @@ function renderProducts(products: Product[]) {
         const productDescription = document.createElement("p") as HTMLParagraphElement;
         productDescription.textContent = product.descripcion;
         productDescription.classList.add("card__description");
-        
+
         const productName = document.createElement("h3") as HTMLHeadingElement;
         productName.textContent = product.nombre;
         productName.classList.add("card__name");
-        
+
         const productPrice = document.createElement("p") as HTMLParagraphElement;
         productPrice.textContent = `$${product.precio}`;
         productPrice.classList.add("card__price");
-        
+
         const addToCartButton = document.createElement("button") as HTMLButtonElement;
         addToCartButton.textContent = "Agregar al carrito";
         addToCartButton.classList.add("card__btn");
@@ -53,21 +53,21 @@ function renderProducts(products: Product[]) {
         addToCartButton.addEventListener("click", () => {
 
             // Obtenemos el carrito actual del localStorage o inicializamos uno nuevo
-            const cartItem: CartItem [] = JSON.parse(localStorage.getItem("cart") || "[]");
+            const cartItem: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
 
             // Verificamos si el producto ya está en el carrito
             const existingItemIndex = cartItem.findIndex((item: CartItem) => item.id === product.id);
 
             // Si el producto ya está en el carrito, incrementamos la cantidad, de lo contrario, lo agregamos con cantidad 1
             if (existingItemIndex !== -1) {
-                cartItem[existingItemIndex].cantidad ++;
+                cartItem[existingItemIndex].cantidad++;
             } else {
                 cartItem.push({ ...product, cantidad: 1 });
             }
 
             // Guardamos el carrito actualizado en el localStorage
             localStorage.setItem("cart", JSON.stringify(cartItem));
-            
+
             updateCartBadge();
 
             addToCartButton.textContent = "Agregado";
@@ -79,16 +79,16 @@ function renderProducts(products: Product[]) {
             }, 1000);
         });
 
-        
+
         const productDetailButton = document.createElement("button") as HTMLButtonElement;
         productDetailButton.textContent = "Ver detalles";
         productDetailButton.classList.add("card__btn", "card__btn--secondary");
         // Evento para redirigir a la página de detalles del producto
         productDetailButton.addEventListener("click", () => {
             window.location.href = `/src/pages/store/productDetail/productDetail.html?id=${product.id}`;
-         }
-    
-    );
+        }
+
+        );
 
 
         // Agregamos los elementos a la tarjeta y luego la tarjeta al contenedor
@@ -101,13 +101,13 @@ function renderProducts(products: Product[]) {
 // Función para manejar la búsqueda de productos
 const searchInput = document.getElementById("searchInput") as HTMLInputElement;
 
-    searchInput.addEventListener("input", () => {
-        const searchTerm = searchInput.value.toLowerCase();
-        const filteredProducts = PRODUCTS.filter((product) =>
-            product.nombre.toLowerCase().includes(searchTerm)
-        );
-        renderProducts(filteredProducts);
-    });
+searchInput.addEventListener("input", () => {
+    const searchTerm = searchInput.value.toLowerCase();
+    const filteredProducts = PRODUCTS.filter((product) =>
+        product.nombre.toLowerCase().includes(searchTerm)
+    );
+    renderProducts(filteredProducts);
+});
 
 // Renderizado inicial de productos y categorías
 
@@ -122,34 +122,34 @@ function renderCategories() {
     // Opción para mostrar todos los productos
     const allItem = document.createElement("li") as HTMLLIElement;
 
-        allItem.innerHTML = `<span class="category-icon">${CATEGORY_ICONS["Todas"]}</span> Todas`;
-        allItem.classList.add("sidebar__item");
+    allItem.innerHTML = `<span class="category-icon">${CATEGORY_ICONS["Todas"]}</span> Todas`;
+    allItem.classList.add("sidebar__item");
 
-        allItem.addEventListener("click", () => {
-            setActiveCategory(allItem);
-            renderProducts(PRODUCTS);
-        });
+    allItem.addEventListener("click", () => {
+        setActiveCategory(allItem);
+        renderProducts(PRODUCTS);
+    });
 
-        categoriasList.appendChild(allItem);
-    
-        // Iteramos sobre las categorías y creamos los elementos correspondientes
+    categoriasList.appendChild(allItem);
+
+    // Iteramos sobre las categorías y creamos los elementos correspondientes
     categorias.forEach((categoria: { nombre: string; id: number }) => {
 
-        
+
         const svgIcon = CATEGORY_ICONS[categoria.nombre] || "";
-        
+
         const categoryItem = document.createElement("li") as HTMLLIElement;
         categoryItem.innerHTML = `<span class="category-icon">${svgIcon}</span> ${categoria.nombre}`;
         categoryItem.classList.add("sidebar__item");
         categoriasList?.appendChild(categoryItem);
-        
+
         // Evento para filtrar los productos por categoría al hacer clic en el nombre de la categoría
         categoryItem.addEventListener("click", () => {
             setActiveCategory(categoryItem);
             const filteredProducts = PRODUCTS.filter((product: Product) =>
                 product.categorias.some((cat: { id: number }) => cat.id === categoria.id)
             );
-            
+
             renderProducts(filteredProducts);
         });
     });

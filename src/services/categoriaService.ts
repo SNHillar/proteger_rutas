@@ -1,20 +1,23 @@
+import type { ICategory } from "../types/category";
+
 const API_URL = 'http://localhost:8080/api/categorias';
 
 export const CategoriaService = {
 
-  async getAll() {
+  async getAll(): Promise<ICategory[]> {
     const response = await fetch(API_URL);
     if (!response.ok) throw new Error('Failed to fetch categories');
     return await response.json();
   },
 
 
-  async create(categoria: { name: string, description: string }) {
+  async create(nombre: string, descripcion: string) {
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(categoria)
+      body: JSON.stringify({ nombre, descripcion })
     });
+
     if (response.status === 403 || response.status === 401) {
       throw new Error('Unauthorized access');
     }
@@ -22,11 +25,11 @@ export const CategoriaService = {
     return await response.json();
   },
 
-    async update(id: number, categoria: { name: string, description: string }) {
+  async update(id: number, name: string, description: string) {
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(categoria)
+      body: JSON.stringify({ name, description })
     });
     if (response.status === 403 || response.status === 401) {
       throw new Error('Unauthorized access');
@@ -35,11 +38,14 @@ export const CategoriaService = {
     return await response.json();
   },
 
-    async delete(id: number) {
+  async delete(id: number) {
     const response = await fetch(`${API_URL}/${id}`, {
-      method: 'DELETE'
+      method: 'PUT'
     });
+    if (response.status === 403 || response.status === 401) {
+      throw new Error('Unauthorized access');
+    }
     if (!response.ok) throw new Error('Failed to delete category');
   }
-  
-    }
+
+}
