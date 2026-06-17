@@ -31,9 +31,16 @@
 }
 
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background-color: var(--bg-cream);
     color: var(--text-dark);
     font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+main {
+    flex: 1;
 }
 
 /*---------------- ESTILOS DEL ENCABEZADO ----------------*/
@@ -1187,4 +1194,18 @@ body {
     }
 
 
+}
+
+.footer-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #1a2e26;
+    height: 7rem; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.footer-column{
+    color: var(--white);
 }
