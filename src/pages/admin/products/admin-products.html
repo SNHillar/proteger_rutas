@@ -153,11 +153,11 @@
                         <option value="hamburguesas">Hamburguesas</option>
                     </select>
 
-                    <button class="admin-btn-add">+ Nuevo Producto</button>
+                    <button id="add-product" class="admin-btn-add">+ Nuevo Producto</button>
                 </div>
             </section>
 
-            <section class="admin-cards-flex">
+            <section id="gridProducts" class="admin-cards-flex">
 
                 <article class="management-card">
                     <div class="management-card__media">
@@ -242,6 +242,43 @@
             </section>
         </main>
     </div>
+    <div id="productModal" class="modal-overlay">
+        <div class="modal-card">
+            <button id="closeModalBtn" class="modal-card__close-btn">×</button>
+            
+            <h3 class="modal-card__title">Nuevo Producto</h3>
+            
+            <form id="productForm" class="modal-form">
+                <div class="modal-form__group">
+                    <label for="prodcutName" class="modal-form__label">Nombre</label>
+                    <input type="text" id="productName" class="modal-form__input" placeholder="Ej. Pizzas" required>
+                </div>
+
+                <div class="modal-form__group">
+                    <label for="productPrice" class="modal-form__label">Precio</label>
+                    <input id="productPrice" type="number" class="modal-form__input" placeholder="Precio del producto.." required></input>
+                </div>
+                <div class="modal-form__group">
+                    <label for="productDescription" class="modal-form__label">Descripción</label>
+                    <textarea id="productDescription" class="modal-form__textarea" placeholder="Descripción del producto..." rows="3" required></textarea>
+                </div>
+                <div class="modal-form__group">
+                    <label for="productStock" class="modal-form__label">Stock</label>
+                    <input id="productStock" type="number" class="modal-form__input" placeholder="Ingrese el stock.." required></input>
+                </div>
+                <div class="modal-form__group">
+                    <label for="productImage" class="modal-form__label">Imagen</label>
+                    <input id="productImage" class="modal-form__input" placeholder="URL de la imagen del producto..." required></input>
+                </div>
+                <div class="modal-form__group">
+                    <label for="productCategory" class="modal-form__label">Categoría</label>
+                    <input id="productCategory" type="number" class="modal-form__input" placeholder="Categoría del producto..." required></input>
+                </div>
+                <button type="submit" class="modal-form__btn-submit">Guardar</button>
+            </form>
+        </div>
+    </div>
+    <script type="module" src="./adminProduct.ts"></script>
 </body>
 
 </html>

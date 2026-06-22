@@ -32,11 +32,11 @@ export const productService = {
         return await response.json();    
     },
 
-    async create(id: number, name: string, price: number, description: string, stock: number, image: string, categoryId: number ){
-        const response = await fetch(`${API_URL}/${id}`, {
-            method: "PUT",
+    async create(name: string, price: number, description: string, stock: number, image: string, categoryId: number ){
+        const response = await fetch(API_URL, {
+            method: "POST",
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({id, name, price, description, stock, image, categoryId})
+            body: JSON.stringify({name, price, description, stock, image, categoryId})
         })
         if(response.status === 403 || response.status === 401){
             throw new Error("Unauthorized access.")

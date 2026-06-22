@@ -3,23 +3,25 @@ import { CategoriaService } from "../../../services/categoryService";
 
 const addBtn = document.getElementById('create-btn') as HTMLButtonElement;
 const categoriesList = document.getElementById('categories-list') as HTMLDivElement;
-const deleteBtn = document.getElementById('deleteBtn') as HTMLButtonElement;
-const editBtn = document.getElementById('editBtn') as HTMLButtonElement;
+const modalCategory = document.getElementById('categoryModal') as HTMLDivElement;
+const categoryForm = document.getElementById("categoryForm") as HTMLFormElement;
+const categoryNameInput = document.getElementById("categoryName") as HTMLInputElement;
+const categoryDescriptionInput = document.getElementById("categoryDescription") as HTMLTextAreaElement;
 
 let categories: ICategory[] = [];
 
 async function loadCategories() {
     try {
         categories = await CategoriaService.getAll();
-        renderCategories();
+        renderCategories(categories);
     } catch (error) {
         console.error('Error al cargar categorías:', error);
     }
 }
 
-function renderCategories() {
+function renderCategories(categories: ICategory[]) {
 
-
+    if(!categories) return;
     categoriesList.innerHTML = '';
     categories.forEach(category => {
         const categoryElement = document.createElement('article');
@@ -52,18 +54,36 @@ function renderCategories() {
 
         actionsBtns.append(editBtn, deleteBtn);
         cardContent.append(categoryTitle, categoryDescription, actionsBtns);
-        categoriesList.appendChild(cardContent);
+        categoryElement.append(cardContent);
+        categoriesList.appendChild(categoryElement);
     });
 }
 
 addBtn.addEventListener('click', () => {
-    const name = prompt('Nombre de la categoría:');
-    const description = prompt('Descripción de la categoría:');
-    if (name && description) {
-        CategoriaService.create(name, description)
-            .then(() => loadCategories())
-            .catch(error => console.error('Error al crear categoría:', error));
-    }
+    modalCategory.classList.add('modal-overlay--show');
+    
+    categoryForm?.addEventListener('submit', async(event) => {
+
+        event.preventDefault();
+
+        const nameValue = categoryNameInput.value.trim();
+        const descriptionValue = categoryDescriptionInput.value.trim();
+
+        try{
+            await CategoriaService.create(nameValue, descriptionValue);
+            alert('Categoría creada con éxito.');
+
+            categoryForm.reset();
+
+            modalCategory.classList.remove('modal-overlay--show');
+
+            const updateCategories = await CategoriaService.getAll();
+            renderCategories(updateCategories);
+        } catch(error){
+            console.error("Error al crear la categoría desde el modal:", error);
+            alert("Hubo un error al guardar la categoría. Revisá la consola.");
+        }
+    })
 });
 
 

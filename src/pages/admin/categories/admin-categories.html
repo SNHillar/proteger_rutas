@@ -144,6 +144,27 @@
             </section>
         </main>
     </div>
+    <div id="categoryModal" class="modal-overlay">
+        <div class="modal-card">
+            <button id="closeModalBtn" class="modal-card__close-btn">×</button>
+            
+            <h3 class="modal-card__title">Nueva Categoría</h3>
+            
+            <form id="categoryForm" class="modal-form">
+                <div class="modal-form__group">
+                    <label for="categoryName" class="modal-form__label">Nombre</label>
+                    <input type="text" id="categoryName" class="modal-form__input" placeholder="Ej. Promociones" required>
+                </div>
+                
+                <div class="modal-form__group">
+                    <label for="categoryDescription" class="modal-form__label">Descripción</label>
+                    <textarea id="categoryDescription" class="modal-form__textarea" placeholder="Descripción de la categoría..." rows="3" required></textarea>
+                </div>
+                
+                <button type="submit" class="modal-form__btn-submit">Guardar</button>
+            </form>
+        </div>
+    </div>
     <script type="module" src="adminCategories.js"></script>
 </body>
 

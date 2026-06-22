@@ -25,10 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    productImg.src = productoEncontrado.imagen;
-    productTitle.textContent = productoEncontrado.nombre;
-    productDescription.textContent = productoEncontrado.descripcion;
-    productPrice.textContent = `$${productoEncontrado.precio.toFixed(2)}`;
+    productImg.src = productoEncontrado.image;
+    productTitle.textContent = productoEncontrado.name;
+    productDescription.textContent = productoEncontrado.description;
+    productPrice.textContent = `$${productoEncontrado.price.toFixed(2)}`;
 
     backButton.addEventListener("click", () => {
         window.history.back();

@@ -37,13 +37,6 @@ form.addEventListener("submit", (e: SubmitEvent) => {
     return;
   }
 
-  // const user: IUser = {
-  //   email: valueEmail,
-  //   password: valuePassword,
-  //   role: valueRol,
-  //   loggedIn: true,
-  // };
-
   const parseUser = JSON.stringify(userFound);
   localStorage.setItem("userData", parseUser);
 });
