@@ -918,7 +918,44 @@ body {
     transition: border-color 0.2s;
 }
 
+/* TOAST NOTIFICATIONS */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border-radius: 8px;
+    color: var(--white);
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 9999; /* Para que quede por encima de los modales */
+    
+    /* Lo escondemos moviéndolo hacia la derecha un 150% de su tamaño */
+    transform: translateX(150%);
+    /* Esta es la animación de 0.3s que pediste */
+    transition: transform 0.3s ease-in-out; 
+}
 
+.toast--show {
+    transform: translateX(0);
+}
+
+/* Modificadores de color */
+.toast--success {
+    background-color: #2e7d32; /* Verde lindo */
+}
+
+.toast--error {
+    background-color: #d32f2f; /* Rojo alerta */
+}
+
+.toast__icon svg {
+    width: 24px;
+    height: 24px;
+}
 
 
 /* ADMIN-MANAGEMENT */

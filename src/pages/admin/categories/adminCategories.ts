@@ -7,6 +7,7 @@ const modalCategory = document.getElementById('categoryModal') as HTMLDivElement
 const categoryForm = document.getElementById("categoryForm") as HTMLFormElement;
 const categoryNameInput = document.getElementById("categoryName") as HTMLInputElement;
 const categoryDescriptionInput = document.getElementById("categoryDescription") as HTMLTextAreaElement;
+const closeModalBtn = document.getElementById('closeModalBtn') as HTMLButtonElement;
 
 let categories: ICategory[] = [];
 
@@ -62,7 +63,9 @@ function renderCategories(categories: ICategory[]) {
 addBtn.addEventListener('click', () => {
     modalCategory.classList.add('modal-overlay--show');
     
-    categoryForm?.addEventListener('submit', async(event) => {
+});
+
+categoryForm?.addEventListener('submit', async(event) => {
 
         event.preventDefault();
 
@@ -84,6 +87,11 @@ addBtn.addEventListener('click', () => {
             alert("Hubo un error al guardar la categoría. Revisá la consola.");
         }
     })
+
+closeModalBtn?.addEventListener('click', () => {
+    // 1. Cerramos el modal sacándole la clase
+    modalCategory.classList.remove('modal-overlay--show');
+    categoryForm.reset();
 });
 
 

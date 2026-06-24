@@ -7,15 +7,15 @@ export const productService = {
     async getAll(): Promise<Product[]> {
         const response = await fetch(API_URL);
         if(!response.ok) throw new Error("Failed to fetch products.")
-        return await response.json();    
+        return await response.json() as Product[];    
     },
 
-    async getById(id: number) {
+    async getById(id: number): Promise<Product> {
     const response = await fetch(`${API_URL}/${id}`, {
       method: 'GET'
     });
     if (!response.ok) throw new Error('Failed to get product');
-    return await response.json();
+    return await response.json() as Product;
     },
 
 
@@ -29,7 +29,7 @@ export const productService = {
             throw new Error("Unauthorized access.")
         }
         if(!response.ok) throw new Error("Failed to update product.")
-        return await response.json();    
+        return await response.json() as Product;    
     },
 
     async create(name: string, price: number, description: string, stock: number, image: string, categoryId: number ){
@@ -42,7 +42,7 @@ export const productService = {
             throw new Error("Unauthorized access.")
         }
         if(!response.ok) throw new Error("Failed to create product.")
-        return await response.json();    
+        return await response.json() as Product;    
     },
 
 

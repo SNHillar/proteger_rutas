@@ -5,9 +5,11 @@ const API_URL = 'http://localhost:8080/api/categories';
 export const CategoriaService = {
 
   async getAll(): Promise<ICategory[]> {
-    const response = await fetch(API_URL);
+    const response = await fetch(API_URL, {
+      method: 'GET'
+    });
     if (!response.ok) throw new Error('Failed to fetch categories');
-    return await response.json();
+    return await response.json() as ICategory[];
   },
 
 
@@ -22,7 +24,7 @@ export const CategoriaService = {
       throw new Error('Unauthorized access');
     }
     if (!response.ok) throw new Error('Failed to create category');
-    return await response.json();
+    return await response.json() as ICategory;
   },
 
   async update(id: number, name: string, description: string) {
@@ -35,7 +37,7 @@ export const CategoriaService = {
       throw new Error('Unauthorized access');
     }
     if (!response.ok) throw new Error('Failed to update category');
-    return await response.json();
+    return await response.json() as ICategory;
   },
 
   async delete(id: number) {

@@ -1,13 +1,7 @@
-console.log("¡El archivo registro.ts ha despertado!");
-
 import type { IUser } from "../../../types/IUser";
 import { navigate } from "../../../utils/navigate";
 
-
-
 const users : IUser[] = JSON.parse(localStorage.getItem("users") || "[]");
-
-
 const form = document.getElementById("form") as HTMLFormElement;
 
 form?.addEventListener("submit", (e: SubmitEvent) => {
@@ -20,21 +14,24 @@ form?.addEventListener("submit", (e: SubmitEvent) => {
       return;
     }
     
-     if (emailExists(email)) {
-       showError("El correo ya está registrado");
-       return;
-     }
+    if (emailExists(email)) {
+      showError("El correo ya está registrado");
+      return;
+    }
 
-     if (!isPasswordValid(password)) {
-       showError("La contraseña debe tener al menos 6 caracteres");
-       return;
-     }
+    if (!isPasswordValid(password)) {
+      showError("La contraseña debe tener al menos 6 caracteres");
+      return;
+    }
 
-     users.push({ email, password, loggedIn: false, role: "client" });
+     users.push({ email, password, loggedIn: true, role: "client" });
      localStorage.setItem("users", JSON.stringify(users));
-     showError("Registro exitoso");
      form.reset();
-     navigate("/src/pages/auth/login/login.html");
+
+     sessionStorage.setItem("flashMessage", "¡Bienvenido!");
+     sessionStorage.setItem("flashType", "Success");
+     
+     navigate("/src/pages/store/home/home.html");
  });
 
 const emailExists = (email: string): boolean => {

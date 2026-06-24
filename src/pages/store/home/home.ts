@@ -1,17 +1,34 @@
-import { getCategories, PRODUCTS } from "../../../data/data.js";
+import { CategoriaService } from "../../../services/categoryService.ts";
+import { productService } from "../../../services/productService.ts";
+import type { ICategory } from "../../../types/category.ts";
 import type { CartItem, Product } from "../../../types/product";
 import { CATEGORY_ICONS } from "../../../utils/icons.ts";
+
 
 // Seleccionamos los elementos del DOM que vamos a utilizar
 const productsContainer = document.getElementById("productsGrid") as HTMLDivElement;
 const logoutButton = document.getElementById("logout-btn") as HTMLButtonElement;
+
+let categories: ICategory[] = [];
+let products: Product[] = [];
 
 // Si el botón de logout existe, le agregamos un evento para redirigir al login
 logoutButton.addEventListener("click", () => {
     window.location.href = "/src/pages/auth/login/login.html";
 });
 
-// Función para renderizar los productos en la página
+async function loadProducts(){
+    try{
+        products = await productService.getAll();
+        categories = await CategoriaService.getAll();
+        renderProducts(products);
+        renderCategories(categories);
+    } catch(error){
+        console.log("Error al cargar los prodcutos.", error)
+    }
+}
+
+
 
 function renderProducts(products: Product[]) {
 
@@ -31,7 +48,7 @@ function renderProducts(products: Product[]) {
         productImage.alt = product.name;
 
         const productCategory = document.createElement("p") as HTMLParagraphElement;
-        productCategory.textContent = product.categories.map((cat: { name: string }) => cat.name).join(", ").toUpperCase();
+        productCategory.textContent = product.categoryDto.name;
         productCategory.classList.add("card__category");
 
         const productDescription = document.createElement("p") as HTMLParagraphElement;
@@ -103,7 +120,7 @@ const searchInput = document.getElementById("searchInput") as HTMLInputElement;
 
 searchInput.addEventListener("input", () => {
     const searchTerm = searchInput.value.toLowerCase();
-    const filteredProducts = PRODUCTS.filter((product) =>
+    const filteredProducts = products.filter((product: Product) =>
         product.name.toLowerCase().includes(searchTerm)
     );
     renderProducts(filteredProducts);
@@ -111,9 +128,9 @@ searchInput.addEventListener("input", () => {
 
 // Renderizado inicial de productos y categorías
 
-function renderCategories() {
+function renderCategories(categories: ICategory[]) {
     const categoriasList = document.getElementById("categoriasList") as HTMLUListElement;
-    const categorias = getCategories();
+
 
     if (!categoriasList) return;
 
@@ -127,27 +144,27 @@ function renderCategories() {
 
     allItem.addEventListener("click", () => {
         setActiveCategory(allItem);
-        renderProducts(PRODUCTS);
+        renderProducts(products);
     });
 
     categoriasList.appendChild(allItem);
 
     // Iteramos sobre las categorías y creamos los elementos correspondientes
-    categorias.forEach((categoria: { name: string; id: number }) => {
+    categories.forEach((category: { name: string; id: number }) => {
 
 
-        const svgIcon = CATEGORY_ICONS[categoria.name] || "";
+        const svgIcon = CATEGORY_ICONS[category.name] || "";
 
         const categoryItem = document.createElement("li") as HTMLLIElement;
-        categoryItem.innerHTML = `<span class="category-icon">${svgIcon}</span> ${categoria.name}`;
+        categoryItem.innerHTML = `<span class="category-icon">${svgIcon}</span> ${category.name}`;
         categoryItem.classList.add("sidebar__item");
         categoriasList?.appendChild(categoryItem);
 
         // Evento para filtrar los productos por categoría al hacer clic en el nombre de la categoría
         categoryItem.addEventListener("click", () => {
             setActiveCategory(categoryItem);
-            const filteredProducts = PRODUCTS.filter((product: Product) =>
-                product.categories.some((cat: { id: number }) => cat.id === categoria.id)
+            const filteredProducts = products.filter((product: Product) =>
+                product.categoryDto?.id === category.id
             );
 
             renderProducts(filteredProducts);
@@ -180,6 +197,7 @@ function updateCartBadge() {
 
 // Renderizado inicial
 
-renderProducts(PRODUCTS);
-renderCategories();
+document.addEventListener("DOMContentLoaded", () => {
+    loadProducts();
+})
 updateCartBadge();

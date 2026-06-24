@@ -1,6 +1,6 @@
 import type { Product } from "../../../types/product";
 import { productService } from "../../../services/productService";
-import { CATEGORY_ICONS } from "../../../utils/icons";
+import { ACTIONS_ICONS } from "../../../utils/icons";
 
 const addBtn = document.getElementById("add-product") as HTMLButtonElement;
 const productsGrid = document.getElementById("gridProducts") as HTMLDivElement;
@@ -12,6 +12,7 @@ const productDescriptionInput = document.getElementById('productDescription') as
 const productStockInput = document.getElementById('productStock') as HTMLInputElement;
 const productImageInput = document.getElementById('productImage') as HTMLInputElement;
 const productCategoryInput = document.getElementById('productCategory') as HTMLInputElement;
+const closeModalBtn = document.getElementById('closeModalBtn') as HTMLButtonElement;
 
 let products: Product[] = [];
 let editingProductId: number | null = null;
@@ -22,6 +23,7 @@ async function loadProducts(){
         renderProducts(products);
     } catch(error){
         console.log("Error al cargar los prodcutos.", error)
+        return;
     }
 }
 
@@ -58,11 +60,12 @@ function renderProducts(products: Product[]){
 
         const productDescription = document.createElement('p') as HTMLParagraphElement;
         productDescription.classList.add('management-card__description')
-        productDescription.textContent = product.categoryDto ? product.categoryDto.description : "Sin descripcion";
+        productDescription.textContent = product.description;
 
         const productCategory = document.createElement('p') as HTMLParagraphElement;
         productCategory.classList.add('management-card__category')
-        productCategory.textContent = product.categoryDto ? product.categoryDto.name : "Sin categoría";
+        console.log(product);
+        productCategory.textContent = product.categoryDto.name;
 
         const productPrice = document.createElement('p') as HTMLParagraphElement;
         productPrice.classList.add('management-card__price')
@@ -72,13 +75,13 @@ function renderProducts(products: Product[]){
         editBtn.classList.add('btn-icon-action', 'btn-icon-action--edit')
         editBtn.dataset.id = `${product.id}`;
         editBtn.title = 'Editar';
-        editBtn.innerHTML = `${CATEGORY_ICONS['Edit']}<span>Editar</span>`
+        editBtn.innerHTML = `${ACTIONS_ICONS['Edit']}<span>Editar</span>`
 
         const deleteBtn = document.createElement('button') as HTMLButtonElement;
         deleteBtn.classList.add('btn-icon-action', 'btn-icon-action--delete')
         deleteBtn.dataset.id = `${product.id}`;
         deleteBtn.title = 'Eliminar';
-        deleteBtn.innerHTML = `${CATEGORY_ICONS['Delete']}<span>Eliminar</span>`;
+        deleteBtn.innerHTML = `${ACTIONS_ICONS['Delete']}<span>Eliminar</span>`;
 
         // metemos los botones dentro del div de actions
         actionsBtns.append(editBtn, deleteBtn);
@@ -100,7 +103,7 @@ addBtn.addEventListener('click', () => {
     productsModal.classList.add('modal-overlay--show');
 });
 
-productForm?.addEventListener('submit', async(event) => {
+productForm?.addEventListener('submit', async(event: SubmitEvent) => {
 
         event.preventDefault();
 
@@ -128,19 +131,29 @@ productForm?.addEventListener('submit', async(event) => {
             console.error("Error al crear el producto desde el modal:", error); 
             alert("Hubo un error al guardar la categoría. Revisá la consola."); // TODO: Modal.
         }
-})
+});
+
+closeModalBtn?.addEventListener('click', () => {
+    
+    productsModal.classList.remove('modal-overlay--show');
+    productForm.reset();
+    if (typeof editingProductId !== 'undefined') {
+        editingProductId = null; 
+    }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
+
     loadProducts();
 
-    productsGrid.addEventListener('click', (event) => {
-        const target = event.target as HTMLButtonElement;
+    productsGrid.addEventListener('click', (e: PointerEvent) => {
+        const target = e.target as HTMLButtonElement;
 
         const isEdit = target.closest('.btn-icon-action--edit') as HTMLButtonElement;
         const isDelete = target.closest('.btn-icon-action--delete') as HTMLButtonElement;
 
         if (isDelete) {
-            const id = Number(target.dataset.id);
+            const id = Number(isDelete.dataset.id);
             if (confirm('¿Are you sure to delete this product?')) {
                 productService.delete(id)
                     .then(() => loadProducts())
@@ -149,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if(isEdit){
-            const id = Number(target.dataset.id)
+            const id = Number(isEdit.dataset.id)
             const productToEdit = products.find( p => p.id === id);
             
             if(productToEdit){
@@ -160,14 +173,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 productImageInput.value = productToEdit.image;
                 if(productToEdit.categoryDto){
                     productCategoryInput.value = productToEdit.categoryDto.id.toString();
-                }
-
+                };
                 editingProductId = id;
                 productsModal.classList.add('modal-overlay--show');
-            }
+            
         }
+    }
     });
 });
-
 
 

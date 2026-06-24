@@ -1,10 +1,9 @@
-import type { Product } from "../../../types/product";
-import { PRODUCTS } from "../../../data/data.ts";
+import { productService } from "../../../services/productService.ts";
+import type { Product } from "../../../types/product.ts";
 
 
-// Función para cargar los detalles del producto
+document.addEventListener("DOMContentLoaded", async () => {
 
-document.addEventListener("DOMContentLoaded", () => {
 
     const productImg = document.getElementById("detailImage") as HTMLImageElement;
     const productTitle = document.getElementById("detailTitle") as HTMLHeadingElement;
@@ -17,20 +16,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const productId = parseInt(urlParams.get("id") || "0");
 
-    const productoEncontrado: Product | undefined = PRODUCTS.find((p: Product) => p.id === productId);
-
-    if (!productoEncontrado) {
-        alert("Producto no encontrado");
-        window.location.href = "../home/home.html";
-        return;
+    if (!productId) {
+        console.error("No se encontró ningún ID en la URL");
+        // window.location.href = "../home/home.html"; // Descomentá esto después
+        return; // Corta la ejecución acá
     }
 
-    productImg.src = productoEncontrado.image;
-    productTitle.textContent = productoEncontrado.name;
-    productDescription.textContent = productoEncontrado.description;
-    productPrice.textContent = `$${productoEncontrado.price.toFixed(2)}`;
+    try{
 
-    backButton.addEventListener("click", () => {
-        window.history.back();
+        const findProduct = await productService.getById(productId) as Product;
+
+        productImg.src = findProduct.image;
+        productTitle.textContent = findProduct.name;
+        productDescription.textContent = findProduct.description;
+        productPrice.textContent = `$${findProduct.price.toFixed(2)}`;
+
+        backButton.addEventListener("click", () => {
+            window.history.back();
     });
+    } catch(error){
+        console.error("Error al cargar los detalles: ", error)
+        //window.location.href = "../home/home.html";
+    }
+
 });

@@ -10,11 +10,7 @@ export interface Product {
     stock: number;
     image: string;
     available: boolean;
-    categoryDto: {
-        id: number,
-        name: string,
-        description: string
-    };
+    categoryDto: ICategory;
 }
 
 
