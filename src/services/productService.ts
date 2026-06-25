@@ -48,7 +48,7 @@ export const productService = {
 
     async delete(id: number) {
     const response = await fetch(`${API_URL}/${id}`, {
-      method: 'PUT'
+      method: 'DELETE'
     });
     if (response.status === 403 || response.status === 401) {
       throw new Error('Unauthorized access');

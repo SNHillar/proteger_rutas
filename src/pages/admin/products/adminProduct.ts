@@ -83,6 +83,19 @@ function renderProducts(products: Product[]){
         deleteBtn.title = 'Eliminar';
         deleteBtn.innerHTML = `${ACTIONS_ICONS['Delete']}<span>Eliminar</span>`;
 
+        if(product.deleted){
+            managementCard.classList.add('management-card--deleted')
+
+            editBtn.disabled = true;
+            deleteBtn.disabled = true;
+            deleteBtn.textContent = "Ya eliminado."
+
+            const badgeDeleted = document.createElement('span') as HTMLSpanElement;
+            badgeDeleted.textContent = 'ELIMINADO';
+            badgeDeleted.classList.add('badge-deleted')
+            
+        }
+
         // metemos los botones dentro del div de actions
         actionsBtns.append(editBtn, deleteBtn);
         // metemos imagen y el badge del stock dentro del div de media
