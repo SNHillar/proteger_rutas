@@ -1,32 +1,40 @@
-import type { IUser } from "../../../types/IUser";
 import { navigate } from "../../../utils/navigate";
+import { loginService } from "../../../services/loginService";
 
 const form = document.getElementById("form") as HTMLFormElement;
 const inputEmail = document.getElementById("email") as HTMLInputElement;
 const inputPassword = document.getElementById("password") as HTMLInputElement;
 
 
+async function login() {
+  try {
+    const user = await loginService.login(inputEmail.value, inputPassword.value);
+    if (!user) {
+      showError("Correo o contraseña incorrectos");
+      return;
+    }
+
+    if (user.role === "admin") {
+      user.loggedIn = true;
+      const parseUser = JSON.stringify(user);
+      localStorage.setItem("userData", parseUser);
+      navigate("/src/pages/admin/home/admin-home.html");
+    } else {
+      user.loggedIn = true;
+      const parseUser = JSON.stringify(user);
+      localStorage.setItem("userData", parseUser);
+      navigate("/src/pages/store/home/home.html");
+    }
+  } catch (error) {
+    showError("Error al iniciar sesión");
+  }
+}
+
+
+
 form.addEventListener("submit", (e: SubmitEvent) => {
   e.preventDefault();
-  const valueEmail = inputEmail.value;
-  const valuePassword = inputPassword.value;
-  const usersData: IUser[] = JSON.parse(localStorage.getItem("users") || "[]");
-  const userFound = usersData.find(user => user.email === valueEmail && user.password === valuePassword);
-
-  if (!userFound) {
-    showError("Correo o contraseña incorrectos");
-    return;
-  }
-  if (userFound.role === "admin") {
-    userFound.loggedIn = true;
-    navigate("/src/pages/admin/home/admin-home.html");
-  } else {
-    userFound.loggedIn = true;
-    navigate("/src/pages/store/home/home.html");
-  };
-
-  const parseUser = JSON.stringify(userFound);
-  localStorage.setItem("userData", parseUser);
+  login();
 });
 
 function showError(message: string) {
