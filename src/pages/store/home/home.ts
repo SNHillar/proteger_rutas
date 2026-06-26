@@ -1,8 +1,9 @@
 import { CategoriaService } from "../../../services/categoryService.ts";
 import { productService } from "../../../services/productService.ts";
 import type { ICategory } from "../../../types/category.ts";
-import type { CartItem, Product } from "../../../types/product";
+import type { Product } from "../../../types/product";
 import { CATEGORY_ICONS } from "../../../utils/icons.ts";
+import { addToCart, updateCartCount } from "../../../services/cartService.ts";
 
 
 // Seleccionamos los elementos del DOM que vamos a utilizar
@@ -69,23 +70,7 @@ function renderProducts(products: Product[]) {
         // Evento para agregar el producto al carrito
         addToCartButton.addEventListener("click", () => {
 
-            // Obtenemos el carrito actual del localStorage o inicializamos uno nuevo
-            const cartItem: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
-
-            // Verificamos si el producto ya está en el carrito
-            const existingItemIndex = cartItem.findIndex((item: CartItem) => item.id === product.id);
-
-            // Si el producto ya está en el carrito, incrementamos la cantidad, de lo contrario, lo agregamos con cantidad 1
-            if (existingItemIndex !== -1) {
-                cartItem[existingItemIndex].quantity++;
-            } else {
-                cartItem.push({ ...product, quantity: 1 });
-            }
-
-            // Guardamos el carrito actualizado en el localStorage
-            localStorage.setItem("cart", JSON.stringify(cartItem));
-
-            updateCartBadge();
+            addToCart(product, 1);
 
             addToCartButton.textContent = "Agregado";
             addToCartButton.style.backgroundColor = "var(--primary-dark)";
@@ -182,22 +167,9 @@ function setActiveCategory(element: HTMLLIElement) {
     element.classList.add("sidebar__item--active");
 }
 
-// Función para actualizar el contador del carrito en el header
-
-
-function updateCartBadge() {
-    const cartItems: CartItem[] = JSON.parse(localStorage.getItem("cart") || "[]");
-    const badge = document.getElementById("cart-count") as HTMLSpanElement;
-    if (badge) {
-        const totalCount = cartItems.reduce((sum: number, item: CartItem) => sum + item.quantity, 0);
-        badge.textContent = totalCount.toString();
-        badge.style.display = totalCount > 0 ? "inline-block" : "none";
-    }
-}
-
 // Renderizado inicial
 
 document.addEventListener("DOMContentLoaded", () => {
     loadProducts();
 })
-updateCartBadge();
+updateCartCount();

@@ -17,19 +17,19 @@ const closeModalBtn = document.getElementById('closeModalBtn') as HTMLButtonElem
 let products: Product[] = [];
 let editingProductId: number | null = null;
 
-async function loadProducts(){
-    try{
+async function loadProducts() {
+    try {
         products = await productService.getAll();
         renderProducts(products);
-    } catch(error){
+    } catch (error) {
         console.log("Error al cargar los prodcutos.", error)
         return;
     }
 }
 
-function renderProducts(products: Product[]){
+function renderProducts(products: Product[]) {
 
-    if(!products) return;
+    if (!products) return;
     console.log("Productos que llegaron al render:", products);
     productsGrid.innerHTML = '';
     products.forEach(product => {
@@ -83,7 +83,7 @@ function renderProducts(products: Product[]){
         deleteBtn.title = 'Eliminar';
         deleteBtn.innerHTML = `${ACTIONS_ICONS['Delete']}<span>Eliminar</span>`;
 
-        if(product.deleted){
+        if (product.deleted) {
             managementCard.classList.add('management-card--deleted')
 
             editBtn.disabled = true;
@@ -93,7 +93,9 @@ function renderProducts(products: Product[]){
             const badgeDeleted = document.createElement('span') as HTMLSpanElement;
             badgeDeleted.textContent = 'ELIMINADO';
             badgeDeleted.classList.add('badge-deleted')
-            
+
+            managementCard.appendChild(badgeDeleted);
+
         }
 
         // metemos los botones dentro del div de actions
@@ -116,42 +118,42 @@ addBtn.addEventListener('click', () => {
     productsModal.classList.add('modal-overlay--show');
 });
 
-productForm?.addEventListener('submit', async(event: SubmitEvent) => {
+productForm?.addEventListener('submit', async (event: SubmitEvent) => {
 
-        event.preventDefault();
+    event.preventDefault();
 
-        const nameValue: string = productNameInput.value.trim();
-        const priceValue: number = productPriceInput.valueAsNumber;
-        const descriptionValue: string = productDescriptionInput.value.trim();
-        const stockValue: number = productStockInput.valueAsNumber;
-        const imageValue: string = productImageInput.value.trim();
-        const categoryValue: number = productCategoryInput.valueAsNumber;
+    const nameValue: string = productNameInput.value.trim();
+    const priceValue: number = productPriceInput.valueAsNumber;
+    const descriptionValue: string = productDescriptionInput.value.trim();
+    const stockValue: number = productStockInput.valueAsNumber;
+    const imageValue: string = productImageInput.value.trim();
+    const categoryValue: number = productCategoryInput.valueAsNumber;
 
-        try{
-            if(!editingProductId){
-                await productService.create(nameValue, priceValue, descriptionValue, stockValue, imageValue, categoryValue);
-                alert('Producto creado con éxito.'); // TODO: Modal.
-            } else{
-                await productService.update(editingProductId, nameValue, priceValue, descriptionValue, stockValue, imageValue, categoryValue)
-            }
-            productForm.reset();
-            editingProductId = null;
-            productsModal.classList.remove('modal-overlay--show');
-            const updateProducts = await productService.getAll();
-            renderProducts(updateProducts);
-            
-        } catch(error){
-            console.error("Error al crear el producto desde el modal:", error); 
-            alert("Hubo un error al guardar la categoría. Revisá la consola."); // TODO: Modal.
+    try {
+        if (!editingProductId) {
+            await productService.create(nameValue, priceValue, descriptionValue, stockValue, imageValue, categoryValue);
+            alert('Producto creado con éxito.'); // TODO: Modal.
+        } else {
+            await productService.update(editingProductId, nameValue, priceValue, descriptionValue, stockValue, imageValue, categoryValue)
         }
+        productForm.reset();
+        editingProductId = null;
+        productsModal.classList.remove('modal-overlay--show');
+        const updateProducts = await productService.getAll();
+        renderProducts(updateProducts);
+
+    } catch (error) {
+        console.error("Error al crear el producto desde el modal:", error);
+        alert("Hubo un error al guardar la categoría. Revisá la consola."); // TODO: Modal.
+    }
 });
 
 closeModalBtn?.addEventListener('click', () => {
-    
+
     productsModal.classList.remove('modal-overlay--show');
     productForm.reset();
     if (typeof editingProductId !== 'undefined') {
-        editingProductId = null; 
+        editingProductId = null;
     }
 });
 
@@ -174,24 +176,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        if(isEdit){
+        if (isEdit) {
             const id = Number(isEdit.dataset.id)
-            const productToEdit = products.find( p => p.id === id);
-            
-            if(productToEdit){
+            const productToEdit = products.find(p => p.id === id);
+
+            if (productToEdit) {
                 productNameInput.value = productToEdit.name;
                 productPriceInput.value = productToEdit.price.toString();
                 productDescriptionInput.value = productToEdit.description;
                 productStockInput.value = productToEdit.stock.toString();
                 productImageInput.value = productToEdit.image;
-                if(productToEdit.categoryDto){
+                if (productToEdit.categoryDto) {
                     productCategoryInput.value = productToEdit.categoryDto.id.toString();
                 };
                 editingProductId = id;
                 productsModal.classList.add('modal-overlay--show');
-            
+
+            }
         }
-    }
     });
 });
 

@@ -1,4 +1,5 @@
 import type { CartItem } from "../../../types/product";
+import { getCart, removeFromCart, incrementQuantity, clearCart, updateCartCount } from "../../../services/cartService.ts";
 
 const cartContainer = document.getElementById("cart-items") as HTMLDivElement;
 const cartTotal = document.getElementById("total-amount") as HTMLSpanElement;
@@ -10,9 +11,9 @@ logoutButton.addEventListener("click", () => {
 
 function renderCart() {
 
-    const cartItems: CartItem [] = JSON.parse(localStorage.getItem("cart") || "[]") as CartItem[];
+    const cartItems: CartItem[] = getCart();
 
-    if(cartItems.length === 0) {
+    if (cartItems.length === 0) {
         cartContainer.innerHTML = "<p>Tu carrito está vacío.</p>";
         cartTotal.textContent = "Total: $0";
         return;
@@ -26,7 +27,7 @@ function renderCart() {
         cartItemDiv.classList.add("cart-item");
 
         const itemName = document.createElement("h4") as HTMLHeadingElement;
-        itemName.textContent = item.nombre;
+        itemName.textContent = item.name;
         itemName.classList.add("cart-item__name");
 
         const itemsControlsDiv = document.createElement("div") as HTMLDivElement;
@@ -37,7 +38,7 @@ function renderCart() {
         decreaseButton.classList.add("item-controls__btn", "decrease-btn");
 
         const quantitySpan = document.createElement("span") as HTMLSpanElement;
-        quantitySpan.textContent = item.cantidad.toString();
+        quantitySpan.textContent = item.quantity.toString();
         quantitySpan.classList.add("item-controls__quantity");
 
         const increaseButton = document.createElement("button") as HTMLButtonElement;
@@ -45,14 +46,14 @@ function renderCart() {
         increaseButton.classList.add("item-controls__btn", "increase-btn");
 
         const itemPrice = document.createElement("p") as HTMLParagraphElement;
-        itemPrice.textContent = `Precio: $${item.precio} x ${item.cantidad}`;
+        itemPrice.textContent = `Precio: $${item.price} x ${item.quantity}`;
         itemPrice.classList.add("cart-item__price");
 
 
         itemsControlsDiv.append(decreaseButton, quantitySpan, increaseButton);
         cartItemDiv.append(itemName, itemPrice, itemsControlsDiv);
         cartContainer.appendChild(cartItemDiv);
-        total += item.precio * item.cantidad;
+        total += item.price * item.quantity;
     });
 
     cartTotal.textContent = `Total: $${total}`;
@@ -61,7 +62,7 @@ function renderCart() {
 
 
 
-function setupCartButtons( cartItems: CartItem[]) {
+function setupCartButtons(cartItems: CartItem[]) {
 
     const decreaseButtons = document.querySelectorAll(".decrease-btn") as NodeListOf<HTMLButtonElement>;
     const increaseButtons = document.querySelectorAll(".increase-btn") as NodeListOf<HTMLButtonElement>;
@@ -69,35 +70,28 @@ function setupCartButtons( cartItems: CartItem[]) {
 
     decreaseButtons.forEach((button: HTMLButtonElement, index: number) => {
         button.onclick = () => {
-            cartItems[index].cantidad--;
-            if (cartItems[index].cantidad <= 0) {
-                cartItems.splice(index, 1);
-            }
-            localStorage.setItem("cart", JSON.stringify(cartItems));
+            removeFromCart(cartItems[index].id);
             renderCart();
         };
     });
 
     increaseButtons.forEach((button: HTMLButtonElement, index: number) => {
         button.onclick = () => {
-            cartItems[index].cantidad++;
-            localStorage.setItem("cart", JSON.stringify(cartItems));
+            incrementQuantity(cartItems[index].id);
             renderCart();
         };
     });
 
     if (clearCartButton) {
         clearCartButton.onclick = () => {
-            setupClearCartButton(cartItems);
+            clearCart();
+            renderCart();
         };
     }
 
 
 }
 
-function setupClearCartButton(cartItems: CartItem[]) {
-    localStorage.setItem("cart", JSON.stringify([]));
-    renderCart();
-}
-
 renderCart();
+updateCartCount();
+
