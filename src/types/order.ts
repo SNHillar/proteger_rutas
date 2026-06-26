@@ -1,10 +1,10 @@
 export interface Order {
     id: number;
     date: string;
-    status: string;
+    status: OrderStatus;
     paymentMethod: PaymentMethod;
-    userId: number;
     items: OrderDetail[];
+    userId: number;
 }
 
 export interface OrderDetail {
@@ -15,4 +15,4 @@ export interface OrderDetail {
 
 export type PaymentMethod = "CARD" | "CASH" | "TRANSFER";
 
-export type OrderStatus = "PENDING" | "DELIVERED" | "CANCELLED";
+export type OrderStatus = "PENDING" | "CONFIRMED" | "COMPLETED" | "CANCELED";

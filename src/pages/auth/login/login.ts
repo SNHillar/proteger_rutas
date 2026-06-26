@@ -1,5 +1,6 @@
 import { navigate } from "../../../utils/navigate";
 import { loginService } from "../../../services/loginService";
+import { checkAuhtUser } from "../../../utils/auth";
 
 const form = document.getElementById("form") as HTMLFormElement;
 const inputEmail = document.getElementById("email") as HTMLInputElement;
@@ -14,17 +15,14 @@ async function login() {
       return;
     }
 
-    if (user.role === "admin") {
-      user.loggedIn = true;
-      const parseUser = JSON.stringify(user);
-      localStorage.setItem("userData", parseUser);
-      navigate("/src/pages/admin/home/admin-home.html");
-    } else {
-      user.loggedIn = true;
-      const parseUser = JSON.stringify(user);
-      localStorage.setItem("userData", parseUser);
-      navigate("/src/pages/store/home/home.html");
-    }
+    user.loggedIn = true;
+    localStorage.saveUser(user);
+
+    const routeAdmin = "/src/pages/admin/home/admin-home.html";
+    const routeUser = "/src/pages/store/home/home.html";
+
+    checkAuhtUser(routeAdmin, routeUser, user.role)
+  
   } catch (error) {
     showError("Error al iniciar sesión");
   }

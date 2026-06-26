@@ -4,6 +4,7 @@ import type { ICategory } from "../../../types/category.ts";
 import type { Product } from "../../../types/product";
 import { CATEGORY_ICONS } from "../../../utils/icons.ts";
 import { addToCart, updateCartCount } from "../../../services/cartService.ts";
+import { logout } from "../../../utils/auth.ts";
 
 
 // Seleccionamos los elementos del DOM que vamos a utilizar
@@ -15,7 +16,7 @@ let products: Product[] = [];
 
 // Si el botón de logout existe, le agregamos un evento para redirigir al login
 logoutButton.addEventListener("click", () => {
-    window.location.href = "/src/pages/auth/login/login.html";
+    logout();
 });
 
 async function loadProducts(){

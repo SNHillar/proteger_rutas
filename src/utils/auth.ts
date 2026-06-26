@@ -3,11 +3,8 @@ import type { Rol } from "../types/Rol";
 import { getUSer, removeUser } from "./localStorage";
 import { navigate } from "./navigate";
 
-export const checkAuhtUser = (
-  redireccion1: string,
-  redireccion2: string,
-  rol: Rol
-) => {
+export const checkAuhtUser = (redireccion1: string, redireccion2: string, rol: Rol) => {
+
   console.log("comienzo de checkeo");
 
   const user = getUSer();

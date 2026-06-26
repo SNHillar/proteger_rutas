@@ -1,4 +1,4 @@
-import type { Order } from "../types/product.ts";
+import type { Order } from "../types/order";
 
 const API_URL = "http://localhost:8080/api/orders";
 
@@ -30,5 +30,16 @@ export async function saveOrder(order: Order): Promise<Order> {
     if (!response.ok) {
         throw new Error("Error al guardar el pedido");
     }
+    return response.json();
+}
+
+export async function deleteOrder(id: number) {
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE'
+    });
+    if (response.status === 403 || response.status === 401) {
+      throw new Error('Unauthorized access');
+    }
+    if(!response.ok){ throw new Error("Error to delete order.") }
     return response.json();
 }
