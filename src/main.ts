@@ -1,4 +1,5 @@
 import type { IUser } from "./types/IUser";
+import { normalizeRole } from "./utils/auth";
 import { navigate } from "./utils/navigate";
 
 const userData: IUser | null = JSON.parse(localStorage.getItem("userData") || "null");
@@ -18,14 +19,14 @@ function cheackGuard(): void {
     return;
   }
     
-  if(isAdminPage && userData.role !== "admin") {
+  if (isAdminPage && normalizeRole(userData.role) !== "admin") {
     alert("No tienes permisos para acceder a esta página");
-    navigate("/src/pages/client/home/home.html");
+    navigate("/src/pages/store/home/home.html");
   }
 
-  if(isClientPage && userData.role !== "client") {
+  if (isClientPage && normalizeRole(userData.role) !== "user") {
     alert("No tienes permisos para acceder a esta página");
-    navigate("/src/pages/admin/dashboard/dashboard.html");
+    navigate("/src/pages/admin/home/admin-home.html");
   }
 };
 

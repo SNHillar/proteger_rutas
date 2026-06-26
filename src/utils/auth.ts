@@ -3,24 +3,36 @@ import type { Rol } from "../types/Rol";
 import { getUSer, removeUser } from "./localStorage";
 import { navigate } from "./navigate";
 
+export const normalizeRole = (role: string): "admin" | "user" => {
+  const normalized = role.toLowerCase();
+  return normalized === "admin" ? "admin" : "user";
+};
+
+/**
+ * Protege una página según el rol requerido.
+ * - redireccion1: si no hay sesión (login)
+ * - redireccion2: si el rol no coincide (home del otro tipo de usuario)
+ */
 export const checkAuhtUser = (redireccion1: string, redireccion2: string, rol: Rol) => {
-
-  console.log("comienzo de checkeo");
-
   const user = getUSer();
 
   if (!user) {
-    console.log("no existe en local");
     navigate(redireccion1);
     return;
-  } else {
-    console.log("existe pero no tiene el rol necesario");
+  }
 
-    const parseUser: IUser = JSON.parse(user);
-    if (parseUser.role !== rol) {
-      navigate(redireccion2);
-      return;
-    }
+  const parseUser: IUser = JSON.parse(user);
+  if (normalizeRole(parseUser.role) !== normalizeRole(rol)) {
+    navigate(redireccion2);
+  }
+};
+
+/** Redirige al panel admin o al catálogo según el rol del usuario logueado. */
+export const redirectAfterLogin = (user: IUser) => {
+  if (normalizeRole(user.role) === "admin") {
+    navigate("/src/pages/admin/home/admin-home.html");
+  } else {
+    navigate("/src/pages/store/home/home.html");
   }
 };
 

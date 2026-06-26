@@ -1,6 +1,6 @@
-import { navigate } from "../../../utils/navigate";
 import { loginService } from "../../../services/loginService";
-import { checkAuhtUser } from "../../../utils/auth";
+import { redirectAfterLogin } from "../../../utils/auth";
+import { saveUser } from "../../../utils/localStorage";
 
 const form = document.getElementById("form") as HTMLFormElement;
 const inputEmail = document.getElementById("email") as HTMLInputElement;
@@ -16,12 +16,8 @@ async function login() {
     }
 
     user.loggedIn = true;
-    localStorage.saveUser(user);
-
-    const routeAdmin = "/src/pages/admin/home/admin-home.html";
-    const routeUser = "/src/pages/store/home/home.html";
-
-    checkAuhtUser(routeAdmin, routeUser, user.role)
+    saveUser(user);
+    redirectAfterLogin(user);
   
   } catch (error) {
     showError("Error al iniciar sesión");
