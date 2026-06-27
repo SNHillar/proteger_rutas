@@ -18,8 +18,8 @@
             </div>
 
             <nav class="nav">
-                <a href="../home/home.html" class="nav__link">
-                    <i class="nav-link__icon">🏠</i> Catálogo
+                <a href="../../store/home/home.html" class="nav__link">
+                    <i class="nav-link__icon"></i> Catálogo
                 </a>
                 <a href="../cart/cart.html" class="nav__link">
                     <i class="nav-link__icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M15 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 17h-11v-14h-2" /><path d="M6 5l14 1l-1 7h-13" /></svg></i>
@@ -41,9 +41,41 @@
                 <strong class="cart-total__text"><span id="total-amount" class="cart-total__price">0.00</span></strong>
             </div>
             <button id="clear-cart-btn" class="cart-section__btn cart-section__btn--clear">Limpiar Carrito</button>
-            <button id="checkout-btn" class="cart-section__btn cart-section__btn--checkout">Finalizar Compra</button>
+            <button id="checkout-btn" class="cart-section__btn cart-section__btn--checkout">Proceder a Pagar</button>
         </section>
     </main>
-    <script type="module" src="/src/pages/store/cart/cart.js"></script>
+    <div id="checkout-modal" class="checkout-modal">
+        <div class="checkout-modal__content">
+            <button class="checkout-modal__btn checkout-modal__btn--close">×</button>
+            <h3 class="checkout-modal__title">Finalizar Compra</h3>
+            <form id="checkout-form" class="checkout-form">
+                <div class="checkout-form__group">
+                    <label for="phone" class="checkout-form__label">Teléfono</label>
+                    <input type="tel" id="phone" class="checkout-form__input" placeholder="Ej. 1234567890" required>
+                </div>
+                <div class="checkout-form__group">
+                    <label for="address" class="checkout-form__label">Dirección</label>
+                    <input type="text" id="address" class="checkout-form__input" placeholder="Ej. Calle 123, Ciudad, País" required>
+                </div>
+                <div class="checkout-form__group">
+                    <label for="phone" class="checkout-form__label">Forma de Pago</label>
+                    <select id="payment-method" class="checkout-form__select" required>
+                        <option value="CARD">Tarjeta de Crédito</option>
+                        <option value="CASH">Efectivo</option>
+                        <option value="TRANSFER">Transferencia</option>
+                    </select>
+                </div>
+                <div class="checkout-form__group">
+                    <label for="phone" class="checkout-form__label">Notas Adicionales</label>
+                    <textarea id="notes" class="checkout-form__textarea" placeholder="Ej. No llevar cebolla" required></textarea>
+                </div>
+                <button type="submit" class="checkout-form__btn checkout-form__btn--submit">Finalizar Compra</button>
+                <button type="button" class="checkout-form__btn checkout-form__btn--cancel">Cancelar</button>
+        </form>
+    </div>
+</div>
+<script type="module" src="/src/pages/store/cart/cart.js"></script>
+
 </body>
+
 </html>

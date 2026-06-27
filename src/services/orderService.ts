@@ -1,4 +1,4 @@
-import type { Order } from "../types/order";
+import type { Order, OrderDetail, PaymentMethod } from "../types/order";
 
 const API_URL = "http://localhost:8080/api/orders";
 
@@ -19,18 +19,18 @@ export async function getOrderById(orderId: number): Promise<Order> {
     return response.json();
 }
 
-export async function saveOrder(order: Order): Promise<Order> {
-    const response = await fetch(`${API_URL}`, {
+export async function createOrder(userId: number, paymentMethod: PaymentMethod, items: OrderDetail[]): Promise<Order> {
+    const response = await fetch(`${API_URL}/${userId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(order),
+        body: JSON.stringify({userId, paymentMethod, items}),
     });
     if (!response.ok) {
-        throw new Error("Error al guardar el pedido");
+        throw new Error("Failed to create order");
     }
-    return response.json();
+    return await response.json() as Order;
 }
 
 export async function deleteOrder(id: number) {

@@ -4,10 +4,15 @@ import { getCart, removeFromCart, incrementQuantity, clearCart, updateCartCount 
 const cartContainer = document.getElementById("cart-items") as HTMLDivElement;
 const cartTotal = document.getElementById("total-amount") as HTMLSpanElement;
 const logoutButton = document.getElementById("logout-btn") as HTMLButtonElement;
+const checkoutButton = document.getElementById("checkout-btn") as HTMLButtonElement;
+const checkoutModal = document.getElementById("checkout-modal") as HTMLDivElement;
+const closeCheckoutModalButton = document.querySelector(".checkout-modal__btn--close") as HTMLButtonElement;
+const cancelCheckoutButton = document.querySelector(".checkout-form__btn--cancel") as HTMLButtonElement;
 
 logoutButton.addEventListener("click", () => {
     window.location.href = "/src/pages/auth/login/login.html";
 });
+
 
 function renderCart() {
 
@@ -88,9 +93,25 @@ function setupCartButtons(cartItems: CartItem[]) {
             renderCart();
         };
     }
-
-
 }
+
+checkoutButton?.addEventListener("click", () => {
+    if (getCart().length === 0) return;
+    showCheckoutModal();
+});
+
+closeCheckoutModalButton?.addEventListener("click", hideCheckoutModal);
+cancelCheckoutButton?.addEventListener("click", hideCheckoutModal);
+
+function showCheckoutModal() {
+    checkoutModal?.classList.add("checkout-modal--show");
+}
+
+function hideCheckoutModal() {
+    checkoutModal?.classList.remove("checkout-modal--show");
+}
+
+
 
 renderCart();
 updateCartCount();

@@ -100,6 +100,177 @@ body {
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
+
+/*---------------- ESTILOS DEL MODAL DE CHECKOUT ----------------*/
+
+.checkout-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+
+.checkout-modal--show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.checkout-modal__content {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 20rem;
+}
+
+.checkout-modal__btn {
+    background-color: var(--accent-orange);
+    color: var(--white);
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkout-modal__btn--close {
+    background-color: var(--white);
+    color: var(--primary-dark);
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkout-modal__btn--submit {
+    background-color: var(--accent-orange);
+    color: var(--white);
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkout-modal__btn--cancel {
+    background-color: var(--white);
+    color: var(--primary-dark);
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkout-modal__title {
+    color: var(--primary-dark);
+    text-align: center;
+}
+
+.checkout-modal__btn--close:hover {
+    background-color: var(--white);
+    color: var(--primary-dark);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.checkout-form__group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.checkout-form__label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-description);
+}
+
+.checkout-form__input {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border--color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.checkout-form__select {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border--color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.checkout-form__textarea {
+
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border--color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.checkout-form__btn {
+    background-color: var(--accent-orange);
+    color: var(--white);
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkout-form__btn--submit {
+    background-color: var(--accent-orange);
+    color: var(--white);
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkout-form__btn--cancel {
+    background-color: var(--white);
+    color: var(--primary-dark);
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.checkout-form__btn--submit:hover {
+    background-color: #e85d04;
+    box-shadow: 0 4px 12px rgba(232, 93, 4, 0.3);
+    transition: all 0.3s ease;
+}
+
+.checkout-form__btn--cancel:hover {
+    background-color: var(--white);
+    color: var(--primary-dark);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+
+
+
+
+
+
+
 /*---------------- ESTILOS DEL STORE LAYOUT ----------------*/
 
 .store-layout {
@@ -377,6 +548,23 @@ body {
     color: var(--primary-light);
 }
 
+.form__text {
+    text-align: center;
+    color: var(--primary-light);
+    margin-top: 1rem;
+}
+
+.form__link {
+    color: var(--accent-orange);
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 0.5rem;
+}
+
+.form__link:hover {
+    color: #e85d04;
+    text-decoration: underline;
+}
 
 /* ESTILOS PARA EL MENSAJE DE ERROR */
 

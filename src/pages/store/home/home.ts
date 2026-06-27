@@ -4,12 +4,14 @@ import type { ICategory } from "../../../types/category.ts";
 import type { Product } from "../../../types/product";
 import { CATEGORY_ICONS } from "../../../utils/icons.ts";
 import { addToCart, updateCartCount } from "../../../services/cartService.ts";
-import { logout } from "../../../utils/auth.ts";
-
-
+import { logout, normalizeRole } from "../../../utils/auth.ts";
+import { getUSer } from "../../../utils/localStorage.ts";
+import type { IUser } from "../../../types/IUser.ts";
 // Seleccionamos los elementos del DOM que vamos a utilizar
 const productsContainer = document.getElementById("productsGrid") as HTMLDivElement;
 const logoutButton = document.getElementById("logout-btn") as HTMLButtonElement;
+const adminNavLink = document.getElementById("admin-nav-link") as HTMLAnchorElement;
+
 
 let categories: ICategory[] = [];
 let products: Product[] = [];
@@ -18,6 +20,14 @@ let products: Product[] = [];
 logoutButton.addEventListener("click", () => {
     logout();
 });
+
+const userData = getUSer();
+if (adminNavLink && userData) {
+    const user: IUser = JSON.parse(userData);
+    adminNavLink.style.display = normalizeRole(user.role) === "admin" ? "block" : "none";
+} else if (adminNavLink) {
+    adminNavLink.style.display = "none";
+}
 
 async function loadProducts(){
     try{
