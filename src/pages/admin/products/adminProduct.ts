@@ -1,6 +1,7 @@
 import type { Product } from "../../../types/product";
 import { productService } from "../../../services/productService";
 import { ACTIONS_ICONS } from "../../../utils/icons";
+import type { ICategory } from "../../../types/category";
 
 const addBtn = document.getElementById("add-product") as HTMLButtonElement;
 const productsGrid = document.getElementById("gridProducts") as HTMLDivElement;
@@ -11,10 +12,11 @@ const productPriceInput = document.getElementById('productPrice') as HTMLInputEl
 const productDescriptionInput = document.getElementById('productDescription') as HTMLTextAreaElement;
 const productStockInput = document.getElementById('productStock') as HTMLInputElement;
 const productImageInput = document.getElementById('productImage') as HTMLInputElement;
-const productCategoryInput = document.getElementById('productCategory') as HTMLInputElement;
+const productCategoryInput = document.getElementById('productCategory') as HTMLSelectElement;
 const closeModalBtn = document.getElementById('closeModalBtn') as HTMLButtonElement;
 
 let products: Product[] = [];
+let categories: ICategory[] = []
 let editingProductId: number | null = null;
 
 async function loadProducts() {
@@ -73,13 +75,13 @@ function renderProducts(products: Product[]) {
 
         const editBtn = document.createElement('button') as HTMLButtonElement;
         editBtn.classList.add('btn-icon-action', 'btn-icon-action--edit')
-        editBtn.dataset.id = `${product.id}`;
+        editBtn.dataset.id = `${product.id.toString()}`;
         editBtn.title = 'Editar';
         editBtn.innerHTML = `${ACTIONS_ICONS['Edit']}<span>Editar</span>`
 
         const deleteBtn = document.createElement('button') as HTMLButtonElement;
         deleteBtn.classList.add('btn-icon-action', 'btn-icon-action--delete')
-        deleteBtn.dataset.id = `${product.id}`;
+        deleteBtn.dataset.id = `${product.id.toString()}`;
         deleteBtn.title = 'Eliminar';
         deleteBtn.innerHTML = `${ACTIONS_ICONS['Delete']}<span>Eliminar</span>`;
 
@@ -127,7 +129,9 @@ productForm?.addEventListener('submit', async (event: SubmitEvent) => {
     const descriptionValue: string = productDescriptionInput.value.trim();
     const stockValue: number = productStockInput.valueAsNumber;
     const imageValue: string = productImageInput.value.trim();
-    const categoryValue: number = productCategoryInput.valueAsNumber;
+    
+
+    
 
     try {
         if (!editingProductId) {
@@ -156,6 +160,8 @@ closeModalBtn?.addEventListener('click', () => {
         editingProductId = null;
     }
 });
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
 
