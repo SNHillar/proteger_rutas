@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     productDetailMedia.classList.add('product-detail__media');
     const productImg = document.createElement('img') as HTMLImageElement;
     productImg.classList.add("product-detail__image");
+    const stockBadge = document.createElement("span") as HTMLSpanElement;
+    stockBadge.classList.add("product-detail__stock-badge");
     const productDetailInfo = document.createElement("div") as HTMLDivElement;
     productDetailInfo.classList.add('product-detail__info');
     const productDetailTitle = document.createElement("h2") as HTMLHeadingElement;
@@ -56,6 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     container.appendChild(productDetailMedia);
     productDetailMedia.appendChild(productImg);
+    productDetailMedia.appendChild(stockBadge);
     container.appendChild(productDetailInfo);
     productDetailInfo.appendChild(productDetailTitle);
     productDetailInfo.appendChild(productDetailDescription);
@@ -91,17 +94,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         productImg.src = findProduct.image;
         productDetailTitle.textContent = findProduct.name;
         productDetailDescription.textContent = findProduct.description;
+        stockBadge.textContent = `Stock: ${findProduct.stock}`;
         productDetailBadge.textContent = findProduct.stock > 0 ? "Disponible" : "Agotado";
         productDetailPrice.textContent = `$${findProduct.price}`;
 
         addToCartBtn.addEventListener("click", () => {
             const quantity = parseInt(quantityValue.textContent || "0");
             addToCart(findProduct, quantity);
+            stockBadge.textContent = `Stock: ${findProduct.stock - quantity}`;
+            if (findProduct.stock - quantity === 0) {
+                stockBadge.classList.add("product-detail__stock-badge--out-of-stock");
+                addToCartBtn.disabled = true;
+                addToCartBtn.textContent = "Agotado";
+            }
+            if (findProduct.stock - quantity > 0) {
+                stockBadge.classList.remove("product-detail__stock-badge--out-of-stock");
+                addToCartBtn.disabled = false;
+            }
         });
 
         decreaseBtn.addEventListener("click", () => {
             const currentValue = parseInt(quantityValue.textContent || "0");
-            if (currentValue > 1) {
+            if (currentValue > 1 && currentValue < findProduct.stock) {
                 quantityValue.textContent = (currentValue - 1).toString();
             }
         });

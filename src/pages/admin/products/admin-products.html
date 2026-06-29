@@ -147,10 +147,8 @@
                         <input type="text" class="admin-search__input" placeholder="Buscar producto...">
                     </div>
 
-                    <select class="admin-filter">
-                        <option value="all">Todas las categorías</option>
-                        <option value="pizzas">Pizzas</option>
-                        <option value="hamburguesas">Hamburguesas</option>
+                    <select class="admin-filter" id="productCategoryFilter">
+                        <!-- Aquí se renderizarán las categorías dinámicamente-->
                     </select>
 
                     <button id="add-product" class="admin-btn-add">+ Nuevo Producto</button>
@@ -201,6 +199,18 @@
                 <button type="submit" class="modal-form__btn-submit">Guardar</button>
             </form>
         </div>
+    </div>
+    <div id="deleteProductModal" class="modal-overlay">
+        <div class="delete-modal__content">
+            <button id="closeDeleteModalBtn" class="delete-modal__btn--close">×</button>
+            <h3 class="modal-card__title">Eliminar Producto</h3>
+            <p class="modal-card__description">¿Estás seguro de querer eliminar este producto?</p>
+            <button id="confirmDeleteProductBtn" class="delete-modal__btn">Confirmar</button>
+        </div>
+    </div>
+    <div id="toast" class="toast">
+        <div id="toast-icon" class="toast__icon"></div>
+        <p id="toast-message" class="toast__message">Mensaje de prueba</p>
     </div>
     <script type="module" src="./adminProduct.ts" defer></script>
 </body>

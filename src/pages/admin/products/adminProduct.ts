@@ -2,6 +2,8 @@ import type { Product } from "../../../types/product";
 import { productService } from "../../../services/productService";
 import { ACTIONS_ICONS } from "../../../utils/icons";
 import type { ICategory } from "../../../types/category";
+import { showToast } from "../../../utils/toast";
+import { CategoriaService } from "../../../services/categoryService";
 
 const addBtn = document.getElementById("add-product") as HTMLButtonElement;
 const productsGrid = document.getElementById("gridProducts") as HTMLDivElement;
@@ -14,6 +16,10 @@ const productStockInput = document.getElementById('productStock') as HTMLInputEl
 const productImageInput = document.getElementById('productImage') as HTMLInputElement;
 const productCategoryInput = document.getElementById('productCategory') as HTMLSelectElement;
 const closeModalBtn = document.getElementById('closeModalBtn') as HTMLButtonElement;
+const closeDeleteModalBtn = document.getElementById('closeDeleteModalBtn') as HTMLButtonElement;
+const confirmDeleteProductBtn = document.getElementById('confirmDeleteProductBtn') as HTMLButtonElement;
+const deleteProductModal = document.getElementById('deleteProductModal') as HTMLDivElement;
+const productCategoryFilter = document.getElementById('productCategoryFilter') as HTMLSelectElement;
 
 let products: Product[] = [];
 let categories: ICategory[] = []
@@ -22,11 +28,25 @@ let editingProductId: number | null = null;
 async function loadProducts() {
     try {
         products = await productService.getAll();
+        categories = await CategoriaService.getAll();
+        populateCategorySelect();
         renderProducts(products);
     } catch (error) {
         console.log("Error al cargar los prodcutos.", error)
         return;
     }
+}
+
+function populateCategorySelect() {
+    productCategoryInput.innerHTML = '<option value="">Seleccione una categoría</option>';
+    productCategoryFilter.innerHTML = '<option value="">Seleccione una categoría</option>';
+    categories.forEach(category => {
+        const option = document.createElement('option') as HTMLOptionElement;
+        option.value = category.id.toString();
+        option.textContent = category.name;
+        productCategoryInput.appendChild(option);
+        productCategoryFilter.appendChild(option);
+    });
 }
 
 function renderProducts(products: Product[]) {
@@ -129,16 +149,17 @@ productForm?.addEventListener('submit', async (event: SubmitEvent) => {
     const descriptionValue: string = productDescriptionInput.value.trim();
     const stockValue: number = productStockInput.valueAsNumber;
     const imageValue: string = productImageInput.value.trim();
-    
+    const categoryValue: number = Number(productCategoryInput.value);
 
     
 
     try {
         if (!editingProductId) {
             await productService.create(nameValue, priceValue, descriptionValue, stockValue, imageValue, categoryValue);
-            alert('Producto creado con éxito.'); // TODO: Modal.
+            showToast('Producto creado con éxito.', 'success');
         } else {
             await productService.update(editingProductId, nameValue, priceValue, descriptionValue, stockValue, imageValue, categoryValue)
+            showToast('Producto actualizado con éxito.', 'success');
         }
         productForm.reset();
         editingProductId = null;
@@ -148,17 +169,21 @@ productForm?.addEventListener('submit', async (event: SubmitEvent) => {
 
     } catch (error) {
         console.error("Error al crear el producto desde el modal:", error);
-        alert("Hubo un error al guardar la categoría. Revisá la consola."); // TODO: Modal.
+        showToast("Hubo un error al guardar el producto. Revisá la consola.", 'error');
+        return;
     }
 });
 
-closeModalBtn?.addEventListener('click', () => {
+closeModalBtn?.addEventListener('click', async () => {
 
     productsModal.classList.remove('modal-overlay--show');
     productForm.reset();
     if (typeof editingProductId !== 'undefined') {
         editingProductId = null;
     }
+    const updateProducts = await productService.getAll();
+    renderProducts(updateProducts);
+    return;
 });
 
 
@@ -175,16 +200,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (isDelete) {
             const id = Number(isDelete.dataset.id);
-            if (confirm('¿Are you sure to delete this product?')) {
-                productService.delete(id)
-                    .then(() => loadProducts())
-                    .catch(error => console.error('Failed to delete product:', error));
-            }
+            deleteProductModal.classList.add('modal-overlay--show');
+            confirmDeleteProductBtn.addEventListener('click', async () => {
+                await productService.delete(id);
+                showToast('Producto eliminado con éxito.', 'success');
+                const updateProducts = await productService.getAll();
+                renderProducts(updateProducts);
+                deleteProductModal.classList.remove('modal-overlay--show');
+            });
+            closeDeleteModalBtn.addEventListener('click', () => {
+                deleteProductModal.classList.remove('modal-overlay--show');
+            });
+            return;
         }
 
         if (isEdit) {
             const id = Number(isEdit.dataset.id)
-            const productToEdit = products.find(p => p.id === id);
+            const productToEdit = products.find((p: Product) => p.id === id);
 
             if (productToEdit) {
                 productNameInput.value = productToEdit.name;

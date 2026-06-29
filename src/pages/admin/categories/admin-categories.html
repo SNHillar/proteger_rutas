@@ -165,7 +165,19 @@
             </form>
         </div>
     </div>
-    <script type="module" src="adminCategories.js"></script>
+    <div id="deleteCategoryModal" class="modal-overlay">
+        <div class="delete-modal__content">
+            <button id="closeDeleteModalBtn" class="delete-modal__btn--close">×</button>
+            <h3 class="modal-card__title">Eliminar Categoría</h3>
+            <p class="modal-card__description">¿Estás seguro de querer eliminar esta categoría?</p>
+            <button id="confirmDeleteCategoryBtn" class="delete-modal__btn">Confirmar</button>
+        </div>
+    </div>
+    <div id="toast" class="toast">
+        <div id="toast-icon" class="toast__icon"></div>
+        <p id="toast-message" class="toast__message">Mensaje de prueba</p>
+    </div>
+    <script type="module" src="adminCategories.ts"></script>
 </body>
 
 </html>
