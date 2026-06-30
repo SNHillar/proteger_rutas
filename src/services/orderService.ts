@@ -20,12 +20,12 @@ export async function getOrderById(orderId: number): Promise<Order> {
 }
 
 export async function createOrder(userId: number, paymentMethod: PaymentMethod, items: OrderDetail[]): Promise<Order> {
-    const response = await fetch(`${API_URL}/user/${userId}`, {
+    const response = await fetch(`${API_URL}/user/${userId}?paymentMethod=${paymentMethod}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({userId, paymentMethod, items}),
+        body: JSON.stringify(items),
     });
     if (!response.ok) {
         throw new Error("Failed to create order");

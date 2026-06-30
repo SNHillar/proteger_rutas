@@ -1,4 +1,5 @@
 import type { CartItem, Product } from "../types/product";
+import { showToast } from "../utils/toast";
 
 export function getCart(): CartItem[] {
     return JSON.parse(localStorage.getItem("cart") || "[]") as CartItem[];
@@ -21,6 +22,7 @@ export function addToCart(product: Product, quantity: number) {
     }
 
     saveCart(cart);
+    showToast("Producto agregado al carrito", "success");
 }
 
 export function removeFromCart(productId: number) {
@@ -35,6 +37,7 @@ export function removeFromCart(productId: number) {
     }
 
     saveCart(cart);
+    showToast("Producto eliminado del carrito", "success");
 }
 
 export function incrementQuantity(productId: number) {

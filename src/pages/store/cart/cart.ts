@@ -5,6 +5,7 @@ import type { OrderDetail } from "../../../types/order.ts";
 import { showToast } from "../../../utils/toast.ts";
 import { getUSer } from "../../../utils/localStorage.ts";
 import type { PaymentMethod } from "../../../types/order.ts";
+import type { IUser } from "../../../types/IUser.ts";
 
 
 const cartContainer = document.getElementById("cart-items") as HTMLDivElement;
@@ -118,12 +119,13 @@ function hideCheckoutModal() {
 }
 
 
+
 function cartItemsToOrderDetails(cartItems: CartItem[]): OrderDetail[] {
     console.log(cartItems);
     return cartItems.map(item => ({
         productId: item.id,
+        userId: JSON.parse(getUSer() as string).id as number,
         quantity: item.quantity,
-        subtotal: item.price * item.quantity,
     }));
 }
 
@@ -133,14 +135,14 @@ checkoutForm?.addEventListener("submit", async (e: SubmitEvent) => {
 
     try {
         const formData = new FormData(checkoutForm);
-        const paymentMethod = formData.get("paymentMethod") as PaymentMethod;
+        const paymentMethod = formData.get("paymentMethod")?.toString() as PaymentMethod;
 
         const userData = getUSer();
         if (!userData) {
             showToast("No se pudo obtener el usuario.", "error");
             return;
         }
-        const user = JSON.parse(userData) as { id: number };
+        const user = JSON.parse(userData as string) as { id: number };
         const cartItems = getCart();
 
         if (cartItems.length === 0) {
