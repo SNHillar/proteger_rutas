@@ -60,4 +60,5 @@ export function updateCartCount() {
         cartCountElement.textContent = totalCount.toString();
         cartCountElement.style.display = totalCount > 0 ? "inline-block" : "none";
     }
-}
+}
+

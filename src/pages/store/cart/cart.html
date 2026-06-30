@@ -51,15 +51,15 @@
             <form id="checkout-form" class="checkout-form">
                 <div class="checkout-form__group">
                     <label for="phone" class="checkout-form__label">Teléfono</label>
-                    <input type="tel" id="phone" class="checkout-form__input" placeholder="Ej. 1234567890" required>
+                    <input type="tel" id="phone" name="phone" class="checkout-form__input" placeholder="Ej. 1234567890" required>
                 </div>
                 <div class="checkout-form__group">
                     <label for="address" class="checkout-form__label">Dirección</label>
-                    <input type="text" id="address" class="checkout-form__input" placeholder="Ej. Calle 123, Ciudad, País" required>
+                    <input type="text" id="address" name="address" class="checkout-form__input" placeholder="Ej. Calle 123, Ciudad, País" required>
                 </div>
                 <div class="checkout-form__group">
                     <label for="phone" class="checkout-form__label">Forma de Pago</label>
-                    <select id="payment-method" class="checkout-form__select" required>
+                    <select id="payment-method" name="paymentMethod" class="checkout-form__select" required>
                         <option value="CARD">Tarjeta de Crédito</option>
                         <option value="CASH">Efectivo</option>
                         <option value="TRANSFER">Transferencia</option>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="checkout-form__group">
                     <label for="phone" class="checkout-form__label">Notas Adicionales</label>
-                    <textarea id="notes" class="checkout-form__textarea" placeholder="Ej. No llevar cebolla" required></textarea>
+                    <textarea id="notes" name="notes" class="checkout-form__textarea" placeholder="Ej. No llevar cebolla" maxlength="255" optional></textarea>
                 </div>
                 <button type="submit" class="checkout-form__btn checkout-form__btn--submit">Finalizar Compra</button>
                 <button type="button" class="checkout-form__btn checkout-form__btn--cancel">Cancelar</button>

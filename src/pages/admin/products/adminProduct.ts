@@ -39,13 +39,17 @@ async function loadProducts() {
 
 function populateCategorySelect() {
     productCategoryInput.innerHTML = '<option value="">Seleccione una categoría</option>';
-    productCategoryFilter.innerHTML = '<option value="">Seleccione una categoría</option>';
+    productCategoryFilter.innerHTML = '<option value="">Todas las categorías</option>';
     categories.forEach(category => {
-        const option = document.createElement('option') as HTMLOptionElement;
-        option.value = category.id.toString();
-        option.textContent = category.name;
-        productCategoryInput.appendChild(option);
-        productCategoryFilter.appendChild(option);
+        const modalOption = document.createElement('option') as HTMLOptionElement;
+        modalOption.value = category.id.toString();
+        modalOption.textContent = category.name;
+        productCategoryInput.appendChild(modalOption);
+
+        const filterOption = document.createElement('option') as HTMLOptionElement;
+        filterOption.value = category.id.toString();
+        filterOption.textContent = category.name;
+        productCategoryFilter.appendChild(filterOption);
     });
 }
 
@@ -149,7 +153,7 @@ productForm?.addEventListener('submit', async (event: SubmitEvent) => {
     const descriptionValue: string = productDescriptionInput.value.trim();
     const stockValue: number = productStockInput.valueAsNumber;
     const imageValue: string = productImageInput.value.trim();
-    const categoryValue: number = Number(productCategoryInput.value);
+    const categoryValue: number = parseInt(productCategoryInput.value);
 
     
 

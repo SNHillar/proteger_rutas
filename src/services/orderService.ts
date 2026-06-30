@@ -8,19 +8,19 @@ export async function getOrders(): Promise<Order[]> {
     if (!response.ok) {
         throw new Error("Error al obtener los pedidos");
     }
-    return response.json();
+    return await response.json() as Order[];
 }
 
 export async function getOrderById(orderId: number): Promise<Order> {
-    const response = await fetch(`${API_URL}/${orderId}`);
+    const response = await fetch(`${API_URL}${orderId}`);
     if (!response.ok) {
         throw new Error("Error al obtener el pedido");
     }
-    return response.json();
+    return await response.json() as Order;
 }
 
 export async function createOrder(userId: number, paymentMethod: PaymentMethod, items: OrderDetail[]): Promise<Order> {
-    const response = await fetch(`${API_URL}/${userId}`, {
+    const response = await fetch(`${API_URL}/user/${userId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

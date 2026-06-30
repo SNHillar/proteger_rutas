@@ -1,5 +1,11 @@
 import type { CartItem } from "../../../types/product";
 import { getCart, removeFromCart, incrementQuantity, clearCart, updateCartCount } from "../../../services/cartService.ts";
+import { createOrder } from "../../../services/orderService.ts";
+import type { OrderDetail } from "../../../types/order.ts";
+import { showToast } from "../../../utils/toast.ts";
+import { getUSer } from "../../../utils/localStorage.ts";
+import type { PaymentMethod } from "../../../types/order.ts";
+
 
 const cartContainer = document.getElementById("cart-items") as HTMLDivElement;
 const cartTotal = document.getElementById("total-amount") as HTMLSpanElement;
@@ -111,6 +117,49 @@ function hideCheckoutModal() {
     checkoutModal?.classList.remove("checkout-modal--show");
 }
 
+
+function cartItemsToOrderDetails(cartItems: CartItem[]): OrderDetail[] {
+    console.log(cartItems);
+    return cartItems.map(item => ({
+        productId: item.id,
+        quantity: item.quantity,
+        subtotal: item.price * item.quantity,
+    }));
+}
+
+const checkoutForm = document.getElementById("checkout-form") as HTMLFormElement;
+checkoutForm?.addEventListener("submit", async (e: SubmitEvent) => {
+    e.preventDefault();
+
+    try {
+        const formData = new FormData(checkoutForm);
+        const paymentMethod = formData.get("paymentMethod") as PaymentMethod;
+
+        const userData = getUSer();
+        if (!userData) {
+            showToast("No se pudo obtener el usuario.", "error");
+            return;
+        }
+        const user = JSON.parse(userData) as { id: number };
+        const cartItems = getCart();
+
+        if (cartItems.length === 0) {
+            showToast("Tu carrito está vacío.", "error");
+            return;
+        }
+
+        const items = cartItemsToOrderDetails(cartItems);
+        const order = await createOrder(user.id, paymentMethod, items);
+        console.log(order);
+        clearCart();
+        hideCheckoutModal();
+        renderCart();
+        showToast("Pedido creado con éxito.", "success");
+    } catch (error) {
+        console.error("Error al crear el pedido:", error);
+        showToast("Hubo un error al crear el pedido.", "error");
+    }
+});
 
 
 renderCart();
