@@ -1,6 +1,13 @@
 import { addToCart, updateCartCount } from "../../../services/cartService.ts";
 import { productService } from "../../../services/productService.ts";
 import type { Product } from "../../../types/product.ts";
+import { navigate } from "../../../utils/navigate.ts";
+import { logout } from "../../../utils/auth.ts";
+
+const logoutBtn = document.getElementById("logout-btn") as HTMLButtonElement;
+logoutBtn.addEventListener("click", () => {
+    logout();
+});
 
 
 
@@ -87,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (!findProduct) {
             console.error("Producto no encontrado");
-            window.location.href = "../home/home.html";
+            navigate("../home/home.html")
             return;
         }
 
@@ -96,6 +103,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         productDetailDescription.textContent = findProduct.description;
         stockBadge.textContent = `Stock: ${findProduct.stock}`;
         productDetailBadge.textContent = findProduct.stock > 0 ? "Disponible" : "Agotado";
+        if (findProduct.stock <= 0) {
+            addToCartBtn.disabled = true;
+            addToCartBtn.textContent = "Agotado";
+        }
+        productDetailBadge.classList.add(findProduct.stock > 0 ? "product-detail__badge--available" : "product-detail__badge--unavailable");
         productDetailPrice.textContent = `$${findProduct.price}`;
 
         addToCartBtn.addEventListener("click", () => {
@@ -128,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         backButton.addEventListener("click", () => {
-            window.location.href = "../home/home.html";
+            navigate("../home/home.html")
         });
 
 

@@ -1,6 +1,8 @@
 import type { CartItem, Product } from "../types/product";
 import { showToast } from "../utils/toast";
 
+
+
 export function getCart(): CartItem[] {
     return JSON.parse(localStorage.getItem("cart") || "[]") as CartItem[];
 }
@@ -11,6 +13,8 @@ export function saveCart(cart: CartItem[]) {
 }
 
 export function addToCart(product: Product, quantity: number) {
+    
+
     const cart = getCart();
 
     const existingItem = cart.find(item => item.id === product.id);

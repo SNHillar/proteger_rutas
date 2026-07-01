@@ -264,12 +264,36 @@ body {
     transition: all 0.3s ease;
 }
 
+/*---------------- ESTILOS DEL SELECT DE ESTADO DE PEDIDO ----------------*/
+.management-card__status {
+    max-width: fit-content;
+    min-width: 100px;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border--color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    outline: none;
+}
 
+.management-card__status-option--pending {
+    background-color: var(--bg-cream);
+    color: var(--accent-orange);
+}
 
+.management-card__status-option--confirmed {
+    background-color: var(--bg-cream);
+    color: var(--accent-orange);
+}
 
+.management-card__status-option--completed {
+    background-color: var(--bg-cream);
+    color: var(--accent-orange);
+}
 
-
-
+.management-card__status-option--canceled {
+    background-color: var(--bg-cream);
+    color: var(--accent-orange);
+}
 
 /*---------------- ESTILOS DEL STORE LAYOUT ----------------*/
 
@@ -899,6 +923,16 @@ body {
     color: var(--white);
 }
 
+.product-detail__badge--available {
+    background-color: #00bfa5;
+    color: var(--white);
+}
+
+.product-detail__badge--unavailable {
+    background-color: #d90429;
+    color: var(--white);
+}
+
 .product-detail__actions {
     display: flex;
     flex-direction: column;
@@ -1287,6 +1321,39 @@ body {
 
 
 /* ADMIN-MANAGEMENT */
+
+.order-status {
+    max-width: fit-content;
+    min-width: 100px;
+    border: none;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.order-status--pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.order-status--confirmed {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.order-status--completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.order-status--canceled {
+    background-color: #f8d7da;
+    color: #721c24;
+}
 
 .admin-cards-flex {
     display: flex;

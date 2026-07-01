@@ -33,7 +33,6 @@
             </nav>
         </div>
     </header>
-
     <div class="admin-layout">
 
         <aside class="admin-sidebar">
@@ -59,9 +58,22 @@
                 </a>
             </nav>
         </aside>
+
+        <main class="admin-content">
+            <section class="admin-toolbar">
+                <div class="admin-toolbar__title-group">
+                    <h2 class="admin-content__title">Gestión de Pedidos</h2>
+                </div>
+            </section>
+
+            <section id="orders-list" class="admin-cards-flex">
+                <!-- Aquí se renderizarán los pedidos -->
+            </section>
+        </main>
     </div>
-    <div id="orders-list" class="admin-cards-flex">
-        <!-- Aquí se renderizarán los pedidos -->
+    <div id="toast" class="toast">
+        <div id="toast-icon" class="toast__icon"></div>
+        <p id="toast-message" class="toast__message">Mensaje de prueba</p>
     </div>
     <script type="module" src="./adminOrders.ts"></script>
 </body>

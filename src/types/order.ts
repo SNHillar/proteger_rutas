@@ -8,9 +8,11 @@ export interface Order {
 }
 
 export interface OrderDetail {
-    productId: number;
-    userId: number;
+    id?: number;
+    productId?: number;
+    userId?: number;
     quantity: number;
+    subtotal?: number;
 }
 
 export type PaymentMethod = "CARD" | "CASH" | "TRANSFER";

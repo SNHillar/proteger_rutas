@@ -6,6 +6,7 @@ import { showToast } from "../../../utils/toast.ts";
 import { getUSer } from "../../../utils/localStorage.ts";
 import type { PaymentMethod } from "../../../types/order.ts";
 import type { IUser } from "../../../types/IUser.ts";
+import { logout, normalizeRole } from "../../../utils/auth.ts";
 
 
 const cartContainer = document.getElementById("cart-items") as HTMLDivElement;
@@ -15,10 +16,20 @@ const checkoutButton = document.getElementById("checkout-btn") as HTMLButtonElem
 const checkoutModal = document.getElementById("checkout-modal") as HTMLDivElement;
 const closeCheckoutModalButton = document.querySelector(".checkout-modal__btn--close") as HTMLButtonElement;
 const cancelCheckoutButton = document.querySelector(".checkout-form__btn--cancel") as HTMLButtonElement;
+const adminNavLink = document.getElementById("admin-nav-link") as HTMLAnchorElement;
+
 
 logoutButton.addEventListener("click", () => {
-    window.location.href = "/src/pages/auth/login/login.html";
+    logout();
 });
+
+const userData = getUSer();
+if (adminNavLink && userData) {
+    const user: IUser = JSON.parse(userData);
+    adminNavLink.style.display = normalizeRole(user.role) === "admin" ? "block" : "none";
+} else if (adminNavLink) {
+    adminNavLink.style.display = "none";
+}
 
 
 function renderCart() {
