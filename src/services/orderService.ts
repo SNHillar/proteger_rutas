@@ -31,6 +31,7 @@ export async function updateOrderStatus(orderId: number, status: OrderStatus): P
 
 export async function getOrderById(orderId: number): Promise<Order> {
     const response = await fetch(`${API_URL}/${orderId}`);
+    console.log(response);
     if (!response.ok) {
         throw new Error("Error al obtener el pedido");
     }

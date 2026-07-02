@@ -73,6 +73,7 @@ addBtn.addEventListener('click', () => {
     editingCategoryId = null;
     categoryForm.reset();
     modalCategory.classList.add('modal-overlay--show');
+    renderCategories(categories);
 });
 
 categoryForm?.addEventListener('submit', async (event: SubmitEvent) => {

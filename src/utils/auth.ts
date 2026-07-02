@@ -36,6 +36,11 @@ export const redirectAfterLogin = (user: IUser) => {
   }
 };
 
+export const getCurrentUser = () => {
+  const user = getUSer();
+  return user ? JSON.parse(user) : null;
+};
+
 export const logout = () => {
   removeUser();
   navigate("/src/pages/auth/login/login.html");

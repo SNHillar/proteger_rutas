@@ -1001,8 +1001,8 @@ body {
 }
 
 
-/*---------------- ESTILOS DEL DASHBOARD ADMINISTRADOR ----------------*/
-.admin-layout {
+/*---------------- ESTILOS DE LA PÁGINA DE ADMINISTRADOR ----------------*/
+.admin-layout, .client-layout {
     display: flex;
     min-height: 100vh;
     background-color: #f4f6f9;
@@ -1057,7 +1057,7 @@ body {
 
 
 
-.admin-content {
+.admin-content, .client-content {
     background-color: var(--white);
     padding: 2rem;
     border-radius: 8px;
@@ -1172,18 +1172,18 @@ body {
 
 /* ADMIN-PRODUCTS STYLES */
 
-.admin-toolbar {
+.admin-toolbar, .client-toolbar {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     margin-bottom: 2.5rem
 }
 
-.admin-toolbar__title-group {
+.admin-toolbar__title-group, .client-toolbar__title-group {
     font-size: 1.2rem;
 }
 
-.admin-toolbar__actions {
+.admin-toolbar__actions, .client-toolbar__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
@@ -1355,7 +1355,7 @@ body {
     color: #721c24;
 }
 
-.admin-cards-flex {
+.admin-cards-flex, .client-cards-flex {
     display: flex;
     flex-direction: column;
     gap: 1rem;

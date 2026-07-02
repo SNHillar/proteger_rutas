@@ -20,6 +20,7 @@ const closeDeleteModalBtn = document.getElementById('closeDeleteModalBtn') as HT
 const confirmDeleteProductBtn = document.getElementById('confirmDeleteProductBtn') as HTMLButtonElement;
 const deleteProductModal = document.getElementById('deleteProductModal') as HTMLDivElement;
 const productCategoryFilter = document.getElementById('productCategoryFilter') as HTMLSelectElement;
+const productSearch = document.getElementById('productSearch') as HTMLInputElement;
 
 let products: Product[] = [];
 let categories: ICategory[] = []
@@ -53,6 +54,30 @@ function populateCategorySelect() {
     });
 }
 
+// filtro de productos por categoria
+productCategoryFilter.addEventListener('change', () => {
+    const selectedCategory = productCategoryFilter.value;
+    if (selectedCategory === '') {
+        renderProducts(products);
+    } else {
+        const filteredProducts = products.filter(product => product.categoryDto.id === parseInt(selectedCategory));
+        renderProducts(filteredProducts);
+    }
+});
+
+// filtro de productos por nombre
+productSearch.addEventListener('input', () => {
+    const searchValue = productSearch.value.trim();
+    if (searchValue === '') {
+        renderProducts(products);
+    } else {
+    const filteredProducts = products.filter(product => product.name.toLowerCase().includes(searchValue.toLowerCase()));
+    renderProducts(filteredProducts);
+    }
+});
+
+
+// renderiza los productos en el grid
 function renderProducts(products: Product[]) {
 
     if (!products) return;
@@ -142,6 +167,7 @@ addBtn.addEventListener('click', () => {
     editingProductId = null;
     productForm.reset();
     productsModal.classList.add('modal-overlay--show');
+    renderProducts(products);
 });
 
 productForm?.addEventListener('submit', async (event: SubmitEvent) => {

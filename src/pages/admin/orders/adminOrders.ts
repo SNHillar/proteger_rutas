@@ -58,10 +58,10 @@ function renderOrders(orders: Order[]) {
 
         const orderStatus = document.createElement('select') as HTMLSelectElement;
         orderStatus.innerHTML = `
-            <option value="PENDING">Pendiente</option>
-            <option value="CONFIRMED">Confirmado</option>
-            <option value="COMPLETED">Completado</option>
-            <option value="CANCELED">Cancelado</option>
+            <option value="PENDING">PENDING</option>
+            <option value="CONFIRMED">CONFIRMED</option>
+            <option value="COMPLETED">COMPLETED</option>
+            <option value="CANCELED">CANCELED</option>
         `;
         orderStatus.value = order.status;
         applyStatusClass(orderStatus, order.status);
